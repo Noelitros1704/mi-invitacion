@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Digital</title>
+    <style>
+        /* Estilos Generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #fdfaf6;
+            color: #4a4a4a;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #d4af37; /* Dorado soft */
+            margin-bottom: 5px;
+            font-family: serif;
+        }
+
+        h2 {
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 1.1em;
+            color: #7d7d7d;
+        }
+
+        p {
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        /* Cuenta Regresiva */
+        .timer-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            background: #f8f4ef;
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .timer-box {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .timer-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #b8860b;
+        }
+
+        .timer-label {
+            font-size: 0.75em;
+            text-transform: uppercase;
+            color: #888;
+        }
+
+        /* Secciones e Iconos */
+        .card {
+            border: 1px solid #eee;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            background: #fafafa;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: #4a4a4a;
+            font-size: 1.1em;
+        }
+
+        /* Botones de Acción */
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px 0;
+            margin: 10px 0;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            box-sizing: border-box;
+            transition: transform 0.2s;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-whatsapp {
+            background-color: #25d366;
+            color: white;
+        }
+
+        .btn-map {
+            background-color: #4285f4;
+            color: white;
+        }
+
+        audio {
+            width: 100%;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>¡Te invito a celebrar mi cumpleaños!</h2>
+    <h1>Dayana</h1>
+    <p><strong>#35</strong></p>
+
+    <p>Hay momentos en la vida que son especiales por sí solos, pero compartirlos con las personas que más quieres los hace inolvidables.</p>
+
+    <!-- Cuenta Regresiva -->
+    <div class="timer-container">
+        <div class="timer-box"><span id="days" class="timer-number">00</span><span class="timer-label">Días</span></div>
+        <div class="timer-box"><span id="hours" class="timer-number">00</span><span class="timer-label">Horas</span></div>
+        <div class="timer-box"><span id="minutes" class="timer-number">00</span><span class="timer-label">Min</span></div>
+        <div class="timer-box"><span id="seconds" class="timer-number">00</span><span class="timer-label">Seg</span></div>
+    </div>
+
+    <!-- Música de fondo -->
+    <div class="card">
+        <h3>🎵 Música</h3>
+        <audio controls autoplay loop>
+            <!-- Reemplaza la URL con el archivo MP3 que prefieras -->
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+            Tu navegador no soporta el reproductor de audio.
+        </audio>
+    </div>
+
+    <!-- Fecha y Hora -->
+    <div class="card">
+        <h3>📅 ¿Cuándo y Dónde?</h3>
+        <p><strong>Fecha:</strong> 22 de Octubre</p>
+        <p><strong>Hora:</strong> 09:00 PM</p>
+        <p>Salón de Eventos "La Bamba", Ciudad</p>
+        <a href="https://maps.google.com" target="_blank" class="btn btn-map">📍 Ver en Google Maps</a>
+    </div>
+
+    <!-- Código de Vestimenta -->
+    <div class="card">
+        <h3>👗 Código de Vestimenta</h3>
+        <p><strong>Riguroso Etiqueta / Elegante</strong></p>
+        <p>Reservamos los colores dorado y blanco únicamente para la festejada.</p>
+    </div>
+
+    <!-- Sugerencia de Regalos -->
+    <div class="card">
+        <h3>🎁 Sugerencia de Regalos</h3>
+        <p>Tu presencia es mi mejor regalo, pero si deseas tener un detalle conmigo:</p>
+        <p><strong>Mesa de Regalos:</strong> Liverpool (Evento #123456)</p>
+        <p><strong>Lluvia de Sobres:</strong> Habrá una caja en la recepción para sobres de efectivo.</p>
+    </div>
+
+    <!-- Confirmación por WhatsApp -->
+    <div class="card">
+        <h3>✉️ Confirmación</h3>
+        <p>Por favor confirma tu asistencia antes del 10 de Octubre.</p>
+        <!-- Reemplaza el número 5212345678900 con tu número de teléfono con clave de país -->
+        <a href="https://wa.me/5212345678900?text=¡Hola!%20Confirmo%20mi%20asistencia%20al%20cumpleaños%20de%20Dayana." target="_blank" class="btn btn-whatsapp">
+            📲 Confirmar asistencia
+        </a>
+    </div>
+</div>
+
+<script>
+    // Configura aquí la fecha del evento (Año, Mes [0-11], Día, Hora, Minutos)
+    // Nota: Los meses van de 0 (Enero) a 11 (Diciembre)
+    const eventDate = new Date(2027, 3, 17, 20, 0, 0).getTime();
+
+    const timer = setInterval(function() {
+        const now = new Date().getTime();
+        const distance = eventDate - now;
+
+        if (distance < 0) {
+            clearInterval(timer);
+            document.querySelector(".timer-container").innerHTML = "<h3>¡Llegó el día!</h3>";
+            return;
+        }
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = days < 10 ? '0' + days : days;
+        document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
+        document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+    }, 1000);
+</script>
+
+</body>
+</html>
