@@ -3,16 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitación Digital</title>
+    <title>Invitación Digital - Boda Lizbeth & Noel</title>
     <style>
-        /* Estilos Generales */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #fdfaf6;
             color: #4a4a4a;
             text-align: center;
-            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- PANTALLA DEL SOBRE --- */
+        #envelope-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #f4eae1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* Sobre */
+        .envelope {
+            width: 280px;
+            height: 180px;
+            background-color: #e2d1c3;
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Sello de cera */
+        .wax-seal {
+            padding: 10px 15px;
+            min-width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #d4af37, #aa7c11);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            font-family: serif;
+            font-weight: bold;
+            font-size: 1.1em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 2px solid #f8e5ad;
+            transition: transform 0.3s ease;
+            z-index: 2;
+        }
+
+        .envelope-wrapper:hover .wax-seal {
+            transform: scale(1.1);
+        }
+
+        .open-instruction {
+            margin-top: 25px;
+            font-size: 0.9em;
+            color: #8c7a6b;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.5; }
+            50% { opacity: 1; }
+            100% { opacity: 0.5; }
+        }
+
+        /* --- CONTENIDO DE LA INVITACIÓN --- */
+        #invitation-content {
+            opacity: 0;
+            transition: opacity 1.2s ease 0.5s;
             padding: 20px;
+            display: none;
         }
 
         .container {
@@ -25,9 +110,9 @@
         }
 
         h1 {
-            font-size: 2.5em;
-            color: #d4af37; /* Dorado soft */
-            margin-bottom: 5px;
+            font-size: 2.3em;
+            color: #d4af37;
+            margin-bottom: 10px;
             font-family: serif;
         }
 
@@ -71,7 +156,7 @@
             color: #888;
         }
 
-        /* Secciones e Iconos */
+        /* Secciones */
         .card {
             border: 1px solid #eee;
             padding: 15px;
@@ -86,7 +171,7 @@
             font-size: 1.1em;
         }
 
-        /* Botones de Acción */
+        /* Botones */
         .btn {
             display: block;
             width: 100%;
@@ -124,71 +209,104 @@
 </head>
 <body>
 
-<div class="container">
-    <h2>¡Te invitamos a celebrar nuestra Boda!</h2>
-    <h1>Lizbeth & Noel</h1>
-    <p><strong>#35</strong></p>
-
-    <p>Hay momentos en la vida que son especiales por sí solos, pero compartirlos con las personas que más quieres los hace inolvidables.</p>
-
-    <!-- Cuenta Regresiva -->
-    <div class="timer-container">
-        <div class="timer-box"><span id="days" class="timer-number">00</span><span class="timer-label">Días</span></div>
-        <div class="timer-box"><span id="hours" class="timer-number">00</span><span class="timer-label">Horas</span></div>
-        <div class="timer-box"><span id="minutes" class="timer-number">00</span><span class="timer-label">Min</span></div>
-        <div class="timer-box"><span id="seconds" class="timer-number">00</span><span class="timer-label">Seg</span></div>
+<!-- PANTALLA DEL SOBRE -->
+<div id="envelope-screen" onclick="openEnvelope()">
+    <div class="envelope-wrapper">
+        <div class="envelope">
+            <div class="wax-seal">L&N</div>
+        </div>
     </div>
-
-    <!-- Música de fondo -->
-   <div class="card">
-    <h3>🎵 Música de fondo</h3>
-    <p style="font-size: 0.8em; color: #666;">(Presiona Play para escuchar)</p>
-    <audio controls preload="auto">
-        <source src="musica3.mp3" type="audio/mpeg">
-        Tu navegador no soporta el reproductor de audio.
-    </audio>
+    <p class="open-instruction">✨ Toca el sobre para abrir ✨</p>
 </div>
 
-    <!-- Fecha y Hora -->
-    <div class="card">
-        <h3>📅 ¿Cuándo y Dónde?</h3>
-        <p><strong>Fecha:</strong> 17 de Abril del 2027</p>
-        <p><strong>Hora:</strong> 08:00 PM</p>
-        <p>Salón de Eventos "Rosegarden", Ciudad</p>
-       <a href="https://www.google.com/maps/search/?api=1&query=Rose+Garden+Av+Navojoa+Hermosillo+Sonora" target="_blank" class="btn btn-map">
-        📍 Ver ubicación en Google Maps
-           </a>
-    </div>
+<!-- CONTENIDO COMPLETO DE LA INVITACIÓN -->
+<div id="invitation-content">
+    <div class="container">
+        <h2>¡Te invitamos a celebrar nuestra Boda!</h2>
+        <h1>Lizbeth & Noel</h1>
 
-    <!-- Código de Vestimenta -->
-    <div class="card">
-        <h3>👗 Código de Vestimenta</h3>
-        <p><strong>Riguroso Etiqueta / Elegante</strong></p>
-        <p>Reservamos los colores dorado y blanco únicamente para la festejada.</p>
-    </div>
+        <p>Hay momentos en la vida que son especiales por sí solos, pero compartirlos con las personas que más quieres los hace inolvidables.</p>
 
-    <!-- Sugerencia de Regalos -->
-    <div class="card">
-        <h3>🎁 Sugerencia de Regalos</h3>
-        <p>Tu presencia es mi mejor regalo, pero si deseas tener un detalle conmigo:</p>
-        <p><strong>Mesa de Regalos:</strong> </p>
-        <p><strong>Lluvia de Sobres:</strong> Habrá una caja en la recepción para sobres de efectivo.</p>
-    </div>
+        <!-- Cuenta Regresiva -->
+        <div class="timer-container">
+            <div class="timer-box"><span id="days" class="timer-number">00</span><span class="timer-label">Días</span></div>
+            <div class="timer-box"><span id="hours" class="timer-number">00</span><span class="timer-label">Horas</span></div>
+            <div class="timer-box"><span id="minutes" class="timer-number">00</span><span class="timer-label">Min</span></div>
+            <div class="timer-box"><span id="seconds" class="timer-number">00</span><span class="timer-label">Seg</span></div>
+        </div>
 
-    <!-- Confirmación por WhatsApp -->
-    <div class="card">
-        <h3>✉️ Confirmación</h3>
-        <p>Por favor confirma tu asistencia antes del 10 de Octubre.</p>
-        <!-- Reemplaza el número 526622977259 con tu número de teléfono con clave de país -->
-        <a href="https://wa.me/526622977259?text=¡Hola!%20Confirmo%20mi%20asistencia%20al%20Boda%20de%20Liz&Noel." target="_blank" class="btn btn-whatsapp">
-            📲 Confirmar asistencia
-        </a>
+        <!-- Música de fondo -->
+        <div class="card">
+            <h3>🎵 Música de fondo</h3>
+            <audio id="bg-music" controls preload="auto">
+                <source src="musica3.mp3" type="audio/mpeg">
+                Tu navegador no soporta el reproductor de audio.
+            </audio>
+        </div>
+
+        <!-- Fecha y Hora -->
+        <div class="card">
+            <h3>📅 ¿Cuándo y Dónde?</h3>
+            <p><strong>Fecha:</strong> 17 de Abril del 2027</p>
+            <p><strong>Hora:</strong> 08:00 PM</p>
+            <p>Salón de Eventos "Rose Garden"</p>
+            <p>Hermosillo, Sonora</p>
+            <a href="https://www.google.com/maps/search/?api=1&query=Rose+Garden+Av+Navojoa+Hermosillo+Sonora" target="_blank" class="btn btn-map">
+                📍 Ver ubicación en Google Maps
+            </a>
+        </div>
+
+        <!-- Código de Vestimenta -->
+        <div class="card">
+            <h3>👗 Código de Vestimenta</h3>
+            <p><strong>Riguroso Etiqueta / Elegante</strong></p>
+            <p>Reservamos el color blanco exclusivamente para la novia.</p>
+        </div>
+
+        <!-- Sugerencia de Regalos -->
+        <div class="card">
+            <h3>🎁 Sugerencia de Regalos</h3>
+            <p>Su presencia es nuestro mejor regalo, pero si desean tener un detalle con nosotros:</p>
+            <p><strong>Lluvia de Sobres:</strong> Habrá una caja en la recepción para sobres de efectivo.</p>
+        </div>
+
+        <!-- Confirmación por WhatsApp -->
+        <div class="card">
+            <h3>✉️ Confirmación</h3>
+            <p>Por favor confirma tu asistencia con nosotros.</p>
+            <a href="https://wa.me/526622977259?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20la%20Boda%20de%20Lizbeth%20y%20Noel." target="_blank" class="btn btn-whatsapp">
+                📲 Confirmar asistencia
+            </a>
+        </div>
     </div>
 </div>
 
 <script>
-    // Configura aquí la fecha del evento (Año, Mes [0-11], Día, Hora, Minutos)
-    // Nota: Los meses van de 0 (Enero) a 11 (Diciembre)
+    // Función para abrir la carta y reproducir la música
+    function openEnvelope() {
+        const envelopeScreen = document.getElementById('envelope-screen');
+        const invitationContent = document.getElementById('invitation-content');
+        const music = document.getElementById('bg-music');
+
+        envelopeScreen.style.opacity = '0';
+        
+        setTimeout(() => {
+            envelopeScreen.style.display = 'none';
+            invitationContent.style.display = 'block';
+            setTimeout(() => {
+                invitationContent.style.opacity = '1';
+            }, 50);
+        }, 1000);
+
+        // El toque inicial autoriza la reproducción del sonido en navegadores móviles
+        if (music) {
+            music.play().catch(error => {
+                console.log("Se requiere interacción adicional para reproducir audio.");
+            });
+        }
+    }
+
+    // Cuenta Regresiva (17 de Abril del 2027 a las 8:00 PM)
     const eventDate = new Date(2027, 3, 17, 20, 0, 0).getTime();
 
     const timer = setInterval(function() {
