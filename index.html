@@ -1,862 +1,551 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="h-full scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boda Lizbeth & Noel</title>
-    <!-- Fonts -->
+    <title>Boda Lizbeth & Noel - 17 de Abril, 2027</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emerald: {
+                            900: '#072b20',
+                            800: '#0b3d2e',
+                            700: '#12523f',
+                            600: '#1a6a52',
+                        },
+                        cream: {
+                            50: '#FAF7F2',
+                            100: '#F5EFE6',
+                            200: '#E8DFC8',
+                        },
+                        gold: {
+                            light: '#F3E5AB',
+                            DEFAULT: '#D4AF37',
+                            dark: '#AA7C11',
+                            metallic: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)'
+                        }
+                    },
+                    fontFamily: {
+                        cinzel: ['Cinzel', 'serif'],
+                        script: ['"Alex Brush"', 'cursive'],
+                        garamond: ['"Cormorant Garamond"', 'serif'],
+                        montserrat: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        :root {
-            --emerald-dark: #0B3D2E;
-            --emerald-medium: #13523F;
-            --emerald-light: #1C6B53;
-            --gold-primary: #D4AF37;
-            --gold-light: #F3E5AB;
-            --gold-dark: #AA7A1E;
-            --bg-cream: #FAF8F5;
-            --text-dark: #2C3531;
-            --text-muted: #5A6561;
-            --shadow-3d: 0 15px 35px rgba(0,0,0,0.25);
+        /* Linen Paper Background Texture */
+        .bg-linen {
+            background-color: #FAF7F2;
+            background-image: radial-gradient(#e2d9ca 0.75px, transparent 0.75px), radial-gradient(#e2d9ca 0.75px, #FAF7F2 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #1a1a1a;
-            color: var(--text-dark);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* App Container simulated phone/card view */
-        .app-viewport {
-            width: 100%;
-            max-width: 480px;
-            min-height: 100vh;
-            background-color: var(--bg-cream);
-            position: relative;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
-            overflow-y: auto;
-            overflow-x: hidden;
-        }
-
-        /* Paper Texture Effect */
-        .paper-texture {
-            background-image: radial-gradient(#d8d2c6 0.75px, transparent 0.75px);
-            background-size: 16px 16px;
-            background-color: var(--bg-cream);
-        }
-
-        /* Botanical SVG Decorations */
-        .botanical {
-            position: absolute;
-            z-index: 2;
-            pointer-events: none;
-            width: 180px;
-            height: auto;
-        }
-        .botanical-top-left {
-            top: -10px;
-            left: -10px;
-        }
-        .botanical-bottom-right {
-            bottom: -10px;
-            right: -10px;
-            transform: rotate(180deg);
-        }
-
-        /* --- ENVELOPE OVERLAY (WELCOME SCREEN) --- */
-        #envelope-screen {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100%;
-            max-width: 480px;
-            height: 100vh;
-            z-index: 100;
-            background-color: var(--bg-cream);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            padding: 40px 20px;
-            transition: opacity 1.2s ease, visibility 1.2s ease;
-        }
-
-        .envelope-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .header-title {
-            text-align: center;
-            z-index: 5;
-            margin-top: 20px;
-        }
-        .header-title h3 {
-            font-family: 'Cinzel', serif;
-            font-size: 14px;
-            letter-spacing: 4px;
-            color: var(--emerald-dark);
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-        .header-title h1 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 48px;
-            color: var(--gold-dark);
-            background: linear-gradient(135deg, #B8860B, #FFD700, #996515);
+        /* Metallic Gold Gradient Text */
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #B8860B 0%, #E6CA65 25%, #996515 50%, #F0E68C 75%, #8B6508 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0px 1px 2px rgba(0,0,0,0.1);
-            font-weight: normal;
-        }
-        .header-title p {
-            font-family: 'Playfair Display', serif;
-            font-size: 16px;
-            color: var(--emerald-dark);
-            letter-spacing: 1px;
-            margin-top: 5px;
+            display: inline-block;
         }
 
-        /* 3D Envelope Wrapper */
-        .envelope-wrapper {
-            position: relative;
-            width: 300px;
-            height: 200px;
-            margin: 20px 0;
-            perspective: 1000px;
-            cursor: pointer;
-            z-index: 5;
+        .gold-border {
+            border-image: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #AA771C) 1;
         }
 
-        .envelope {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            background-color: var(--emerald-dark);
-            border-radius: 6px;
-            box-shadow: var(--shadow-3d);
-        }
-
-        /* Flap 3D rotation */
-        .envelope-flap {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 150px solid transparent;
-            border-right: 150px solid transparent;
-            border-top: 110px solid var(--emerald-medium);
-            transform-origin: top;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 4;
-            filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.3));
-        }
-
-        .envelope-pocket {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 0;
-            border-left: 150px solid var(--emerald-dark);
-            border-right: 150px solid var(--emerald-dark);
-            border-bottom: 100px solid var(--emerald-light);
-            border-radius: 0 0 6px 6px;
-            z-index: 3;
-        }
-
-        /* Wax Seal */
+        /* Wax Seal & Envelope 3D Effects */
         .wax-seal {
-            position: absolute;
-            top: 100px;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(1);
-            width: 65px;
-            height: 65px;
-            background: radial-gradient(circle, #E6CA65 0%, #B8860B 60%, #7A5200 100%);
-            border-radius: 50%;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 5;
-            transition: transform 0.3s ease;
-            animation: pulse-glow 2s infinite alternate;
+            background: radial-gradient(circle at 35% 35%, #f1d77a, #c59b27 40%, #7a5806 85%);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.4);
+            border: 2px solid #8a640b;
         }
 
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 4px 10px rgba(0,0,0,0.4), 0 0 0px rgba(212,175,55,0); }
-            100% { box-shadow: 0 4px 15px rgba(0,0,0,0.5), 0 0 15px rgba(212,175,55,0.6); }
+        .envelope-flap {
+            transform-origin: top center;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 20;
         }
 
-        .wax-seal span {
-            font-family: 'Great Vibes', cursive;
-            color: #4A3300;
-            font-size: 24px;
-            font-weight: bold;
-            text-shadow: 0px 1px 1px rgba(255,255,255,0.3);
-        }
-
-        .click-instruction {
-            text-align: center;
-            z-index: 5;
-            margin-top: -10px;
-        }
-        .click-instruction p {
-            font-family: 'Cinzel', serif;
-            font-size: 11px;
-            letter-spacing: 2px;
-            color: var(--emerald-dark);
-            text-transform: uppercase;
-        }
-
-        /* Curved Arrow SVG */
-        .arrow-svg {
-            width: 50px;
-            height: 50px;
-            margin: 5px auto 0;
-            display: block;
-            animation: float-arrow 1.5s infinite ease-in-out;
-        }
-
-        @keyframes float-arrow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        /* Dynamic Reservation Badge */
-        .reservation-badge {
-            background-color: rgba(255,255,255,0.8);
-            border: 1px solid var(--emerald-dark);
-            border-radius: 8px;
-            padding: 12px 24px;
-            text-align: center;
-            z-index: 5;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
-        .reservation-badge .res-title {
-            font-family: 'Cinzel', serif;
-            font-size: 11px;
-            letter-spacing: 2px;
-            color: var(--emerald-dark);
-        }
-        .reservation-badge .res-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 26px;
-            font-weight: bold;
-            color: var(--emerald-dark);
-            border: 1.5px solid var(--emerald-dark);
-            display: inline-block;
-            padding: 2px 14px;
-            border-radius: 4px;
-            margin: 6px 0;
-        }
-        .reservation-badge .res-subtitle {
-            font-family: 'Cinzel', serif;
-            font-size: 10px;
-            letter-spacing: 1.5px;
-            color: var(--emerald-dark);
-        }
-
-        /* Envelope Open Animation State */
-        .envelope-wrapper.open .envelope-flap {
+        .envelope-open .envelope-flap {
             transform: rotateX(180deg);
-            z-index: 1;
-        }
-        .envelope-wrapper.open .wax-seal {
-            transform: translate(-50%, -150px) scale(0.8);
-            opacity: 0;
-            transition: all 0.6s ease;
+            z-index: 5;
         }
 
-        /* --- MAIN INVITATION CONTENT --- */
-        #main-content {
-            opacity: 0;
-            transition: opacity 1.5s ease;
-            padding: 40px 24px 80px;
+        .invitation-letter {
+            transition: transform 1s ease-in-out, opacity 0.8s ease-in-out;
         }
 
-        #main-content.visible {
-            opacity: 1;
+        .envelope-open .invitation-letter {
+            transform: translateY(-80px) scale(1.02);
         }
 
-        /* Audio Floating Control Button */
-        .music-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 46px;
-            height: 46px;
-            border-radius: 50%;
-            background: var(--emerald-dark);
-            color: var(--gold-primary);
-            border: 2px solid var(--gold-primary);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 99;
-            transition: transform 0.3s ease;
+        /* Floating animation for wax seal arrow */
+        @keyframes pulse-subtle {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-4px) scale(1.03); }
         }
-        .music-btn:active {
-            transform: scale(0.9);
-        }
-        .music-btn svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
+        .animate-pulse-subtle {
+            animation: pulse-subtle 2.5s infinite ease-in-out;
         }
 
-        /* Section Styling */
-        .section {
-            text-align: center;
-            margin-bottom: 45px;
-            position: relative;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
         }
-
-        .section-title {
-            font-family: 'Cinzel', serif;
-            font-size: 18px;
-            letter-spacing: 3px;
-            color: var(--emerald-dark);
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
+        ::-webkit-scrollbar-track {
+            background: #FAF7F2;
         }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 40px;
-            height: 1px;
-            background: var(--gold-primary);
-            margin: 8px auto 0;
-        }
-
-        /* Couple Names Banner */
-        .hero-names {
-            margin-top: 20px;
-        }
-        .hero-names h2 {
-            font-family: 'Great Vibes', cursive;
-            font-size: 56px;
-            color: var(--gold-dark);
-            background: linear-gradient(135deg, #B8860B, #FFD700, #996515);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            line-height: 1.2;
-            font-weight: normal;
-        }
-
-        .date-display {
-            font-family: 'Playfair Display', serif;
-            font-size: 18px;
-            color: var(--emerald-dark);
-            margin-top: 10px;
-            letter-spacing: 1px;
-        }
-
-        /* Countdown Timer */
-        .countdown-container {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 20px;
-        }
-        .time-box {
-            background-color: #ffffff;
-            border: 1px solid rgba(11, 61, 46, 0.15);
-            border-radius: 8px;
-            padding: 10px;
-            min-width: 65px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-        }
-        .time-box .number {
-            font-family: 'Playfair Display', serif;
-            font-size: 22px;
-            font-weight: bold;
-            color: var(--emerald-dark);
-        }
-        .time-box .label {
-            font-size: 9px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        /* Event Cards (Church & Reception) */
-        .event-card {
-            background: #ffffff;
-            border-radius: 12px;
-            padding: 24px 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.04);
-            border: 1px solid rgba(19, 82, 63, 0.1);
-        }
-        .event-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 20px;
-            color: var(--emerald-dark);
-            margin-bottom: 8px;
-        }
-        .event-card p {
-            font-size: 13px;
-            color: var(--text-muted);
-            line-height: 1.6;
-            margin-bottom: 6px;
-        }
-        .event-card .time-text {
-            font-weight: 600;
-            color: var(--emerald-medium);
-            margin-bottom: 12px;
-        }
-
-        .btn-gold {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--emerald-dark), var(--emerald-medium));
-            color: #ffffff;
-            text-decoration: none;
-            padding: 10px 22px;
-            border-radius: 25px;
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            border: 1px solid var(--gold-primary);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-        }
-        .btn-gold:hover {
-            background: var(--emerald-dark);
-            transform: translateY(-2px);
-        }
-
-        /* Itinerary Timeline */
-        .timeline {
-            position: relative;
-            max-width: 320px;
-            margin: 25px auto 0;
-            padding-left: 20px;
-            border-left: 2px solid var(--gold-primary);
-            text-align: left;
-        }
-        .timeline-item {
-            position: relative;
-            margin-bottom: 25px;
-            padding-left: 15px;
-        }
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -27px;
-            top: 2px;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background-color: var(--gold-primary);
-            border: 2px solid #ffffff;
-        }
-        .timeline-time {
-            font-family: 'Cinzel', serif;
-            font-size: 12px;
-            font-weight: bold;
-            color: var(--emerald-dark);
-        }
-        .timeline-desc {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-top: 2px;
-        }
-
-        /* Dress Code & Gift Info Cards */
-        .info-box {
-            background-color: rgba(19, 82, 63, 0.04);
-            border-radius: 10px;
-            padding: 20px;
-            margin-bottom: 20px;
-        }
-        .info-box p {
-            font-size: 13px;
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        /* Form RSVP */
-        .rsvp-form {
-            background-color: #ffffff;
-            border-radius: 12px;
-            padding: 24px 20px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.04);
-            border: 1px solid rgba(19, 82, 63, 0.1);
-            text-align: left;
-        }
-        .form-group {
-            margin-bottom: 16px;
-        }
-        .form-group label {
-            display: block;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--emerald-dark);
-            margin-bottom: 6px;
-        }
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 13px;
-            color: var(--text-dark);
-        }
-        .btn-whatsapp {
-            width: 100%;
-            background-color: #25D366;
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 12px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-            margin-top: 10px;
-        }
-
-        footer {
-            text-align: center;
-            font-size: 11px;
-            color: var(--text-muted);
-            margin-top: 40px;
-            letter-spacing: 1px;
+        ::-webkit-scrollbar-thumb {
+            background: #0b3d2e;
+            border-radius: 3px;
         }
     </style>
 </head>
-<body>
 
-    <!-- Audio Element -->
-    <audio id="bg-music" loop preload="auto">
+<body class="bg-linen font-montserrat text-gray-800 min-h-screen flex flex-col justify-between selection:bg-emerald-800 selection:text-white">
+
+    <!-- Audio Player (Hidden Audio, Visible Floating Trigger) -->
+    <audio id="bgAudio" loop preload="auto">
         <source src="musica3.mp3" type="audio/mpeg">
+        Tu navegador no soporta audio HTML5.
     </audio>
 
-    <!-- Floating Audio Control Button -->
-    <button class="music-btn" id="music-toggle" aria-label="Toggle Audio">
-        <svg id="music-icon-play" viewBox="0 0 24 24" style="display:none;">
-            <path d="M8 5v14l11-7z"/>
-        </svg>
-        <svg id="music-icon-pause" viewBox="0 0 24 24">
-            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-        </svg>
+    <button id="audioToggleBtn" onclick="toggleAudio()" class="fixed bottom-5 right-5 z-50 bg-emerald-800 text-amber-200 w-12 h-12 rounded-full shadow-2xl border-2 border-amber-300/60 flex items-center justify-center hover:scale-110 transition-all duration-300 group focus:outline-none">
+        <i id="audioIcon" class="fas fa-music text-lg group-hover:rotate-12 transition-transform"></i>
+        <span class="absolute -top-1 -right-1 flex h-3 w-3">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
+        </span>
     </button>
 
-    <div class="app-viewport paper-texture">
-
-        <!-- Botanical Corners -->
-        <svg class="botanical botanical-top-left" viewBox="0 0 100 100">
-            <path d="M10,10 Q40,10 50,40 Q20,50 10,10 Z" fill="#0B3D2E" opacity="0.7"/>
-            <circle cx="20" cy="25" r="8" fill="#F3E5AB" opacity="0.8"/>
-            <path d="M30,5 Q60,20 70,50 Q40,40 30,5 Z" fill="#13523F" opacity="0.6"/>
-        </svg>
-
-        <svg class="botanical botanical-bottom-right" viewBox="0 0 100 100">
-            <path d="M10,10 Q40,10 50,40 Q20,50 10,10 Z" fill="#0B3D2E" opacity="0.7"/>
-            <circle cx="20" cy="25" r="8" fill="#F3E5AB" opacity="0.8"/>
-            <path d="M30,5 Q60,20 70,50 Q40,40 30,5 Z" fill="#13523F" opacity="0.6"/>
-        </svg>
-
-        <!-- --- WELCOME SCREEN (ENVELOPE) --- -->
-        <div id="envelope-screen">
-            <div class="header-title">
-                <h3>Nuestra Boda</h3>
-                <h1>Lizbeth & Noel</h1>
-                <p>17 de ABRIL del 2027</p>
-            </div>
-
-            <div class="envelope-wrapper" id="envelope-btn">
-                <div class="envelope">
-                    <div class="envelope-flap"></div>
-                    <div class="wax-seal">
-                        <span>L&N</span>
-                    </div>
-                    <div class="envelope-pocket"></div>
-                </div>
-            </div>
-
-            <div class="click-instruction">
-                <p>Click para abrir la invitación</p>
-                <svg class="arrow-svg" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" stroke-width="1.5">
-                    <path d="M12 5v14M5 12l7 7 7-7" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </div>
-
-            <div class="reservation-badge">
-                <div class="res-title">HEMOS RESERVADO</div>
-                <div class="res-number" id="guest-count-display">2</div>
-                <div class="res-subtitle">LUGARES EN SU HONOR</div>
-            </div>
+    <!-- COVER SCREEN (ID: coverScreen) -->
+    <div id="coverScreen" class="relative min-h-screen w-full flex flex-col justify-between items-center py-8 px-4 overflow-hidden transition-all duration-1000 z-30">
+        
+        <!-- Botanical Vector Accents - Top Left -->
+        <div class="absolute -top-6 -left-6 w-56 h-56 md:w-80 md:h-80 pointer-events-none z-10 opacity-95">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full transform -rotate-12">
+                <!-- Gold Eucalyptus Branches -->
+                <path d="M10 10 Q 90 40 160 110" stroke="#C59B27" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <circle cx="40" cy="22" r="8" fill="#0B3D2E" opacity="0.85"/>
+                <circle cx="75" cy="38" r="11" fill="#12523F" opacity="0.9"/>
+                <circle cx="110" cy="65" r="13" fill="#072B20" opacity="0.95"/>
+                <circle cx="140" cy="98" r="10" fill="#1A6A52" opacity="0.85"/>
+                <!-- White Blossoms -->
+                <path d="M50 80 Q 60 60 70 80 Q 80 90 60 100 Q 40 90 50 80 Z" fill="#FFFDF9" stroke="#E8DFC8" stroke-width="1"/>
+                <circle cx="60" cy="85" r="3" fill="#D4AF37"/>
+                <path d="M20 110 Q 35 95 45 110 Q 50 125 30 130 Q 15 120 20 110 Z" fill="#FAF7F2" stroke="#D4AF37" stroke-width="0.75"/>
+                <!-- Gold Foil Accent Leaves -->
+                <path d="M80 20 C 90 10, 100 25, 90 35 C 80 45, 70 30, 80 20 Z" fill="url(#goldGrad)" opacity="0.9"/>
+                <path d="M125 50 C 135 40, 145 55, 135 65 C 125 75, 115 60, 125 50 Z" fill="url(#goldGrad)" opacity="0.85"/>
+                <defs>
+                    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#BF953F"/>
+                        <stop offset="50%" stop-color="#FCF6BA"/>
+                        <stop offset="100%" stop-color="#AA771C"/>
+                    </linearGradient>
+                </defs>
+            </svg>
         </div>
 
-        <!-- --- MAIN INVITATION CONTENT --- -->
-        <div id="main-content">
+        <!-- Botanical Vector Accents - Bottom Right -->
+        <div class="absolute -bottom-6 -right-6 w-56 h-56 md:w-80 md:h-80 pointer-events-none z-10 opacity-95">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full transform rotate-180">
+                <path d="M10 10 Q 90 40 160 110" stroke="#C59B27" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <circle cx="40" cy="22" r="9" fill="#0B3D2E" opacity="0.9"/>
+                <circle cx="75" cy="38" r="12" fill="#12523F" opacity="0.95"/>
+                <circle cx="110" cy="65" r="14" fill="#072B20"/>
+                <circle cx="140" cy="98" r="11" fill="#1A6A52" opacity="0.85"/>
+                <path d="M50 80 Q 60 60 70 80 Q 80 90 60 100 Q 40 90 50 80 Z" fill="#FFFDF9" stroke="#E8DFC8" stroke-width="1"/>
+                <circle cx="60" cy="85" r="3" fill="#D4AF37"/>
+                <path d="M80 20 C 90 10, 100 25, 90 35 C 80 45, 70 30, 80 20 Z" fill="url(#goldGrad)" opacity="0.9"/>
+            </svg>
+        </div>
+
+        <!-- Header Titles -->
+        <header class="text-center pt-6 z-20 max-w-lg mx-auto">
+            <h3 class="font-cinzel text-xs md:text-sm tracking-[0.35em] text-gray-700 uppercase mb-2 font-semibold">Nuestra Boda</h3>
+            <h1 class="font-script text-5xl md:text-7xl text-gold-gradient py-1 drop-shadow-sm leading-tight">Lizbeth & Noel</h1>
+            <p class="font-garamond text-lg md:text-xl text-gray-800 tracking-widest mt-2 font-medium">17 de ABRIL del 2027</p>
+        </header>
+
+        <!-- Interactive Envelope Component -->
+        <div class="relative my-6 w-full max-w-md flex flex-col items-center justify-center z-20">
             
-            <div class="section hero-names">
-                <p style="font-family: 'Cinzel', serif; font-size: 12px; letter-spacing: 3px; color: var(--emerald-dark);">¡NOS CASAMOS!</p>
-                <h2>Lizbeth & Noel</h2>
-                <div class="date-display">Sábado, 17 de Abril del 2027</div>
+            <!-- Envelope Body Container -->
+            <div id="envelopeContainer" class="relative w-80 h-52 sm:w-96 sm:h-60 bg-emerald-900 rounded-lg shadow-2xl cursor-pointer transform transition-transform hover:scale-[1.02] duration-300 border border-emerald-800/80 flex items-center justify-center overflow-visible">
+                
+                <!-- Envelope Flap (Triangle Top) -->
+                <div class="envelope-flap absolute top-0 left-0 w-full h-full pointer-events-none">
+                    <svg viewBox="0 0 384 240" class="w-full h-full drop-shadow-md overflow-visible">
+                        <polygon points="0,0 384,0 192,130" fill="#0b3d2e" stroke="#072b20" stroke-width="1"/>
+                        <polygon points="0,0 192,130" fill="#12523f" opacity="0.3"/>
+                    </svg>
+                </div>
+
+                <!-- Envelope V-Bottom & Sides Graphics -->
+                <div class="absolute inset-0 pointer-events-none rounded-lg overflow-hidden z-10">
+                    <svg viewBox="0 0 384 240" class="w-full h-full">
+                        <!-- Left Flap -->
+                        <polygon points="0,0 0,240 180,120" fill="#093326"/>
+                        <!-- Right Flap -->
+                        <polygon points="384,0 384,240 204,120" fill="#072b20"/>
+                        <!-- Bottom Flap -->
+                        <polygon points="0,240 384,240 192,110" fill="#0b3d2e"/>
+                        <!-- Inner Shadows for Depth -->
+                        <line x1="0" y1="240" x2="192" y2="110" stroke="#051f17" stroke-width="2" opacity="0.4"/>
+                        <line x1="384" y1="240" x2="192" y2="110" stroke="#051f17" stroke-width="2" opacity="0.4"/>
+                    </svg>
+                </div>
+
+                <!-- Gold Wax Seal (Centered on Flap Tip) -->
+                <div id="waxSeal" onclick="openInvitation()" class="wax-seal absolute top-[42%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 rounded-full z-30 flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-110 active:scale-95 group">
+                    <!-- Custom L&N Monogram inside Wax Seal -->
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full border border-amber-300/40 flex items-center justify-center text-center p-1">
+                        <span class="font-script text-amber-100 text-xl sm:text-2xl font-bold tracking-tighter drop-shadow-md select-none group-hover:scale-105 transition-transform">L&N</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Spiral Arrow & Click Prompt -->
+            <div class="relative mt-6 flex flex-col items-center justify-center">
+                <!-- Curved Gold Dashed Spiral SVG -->
+                <svg class="w-24 h-12 text-amber-600 -mt-2 animate-pulse-subtle" viewBox="0 0 100 50" fill="none">
+                    <path d="M 20 40 Q 10 10, 50 10 Q 80 10, 65 30 Q 55 40, 48 22" stroke="#B38728" stroke-width="2" stroke-dasharray="3 3" fill="none" stroke-linecap="round"/>
+                    <polygon points="44,26 52,18 52,28" fill="#B38728"/>
+                </svg>
+
+                <button onclick="openInvitation()" class="font-cinzel text-xs tracking-widest text-gray-800 font-bold uppercase hover:text-amber-700 transition-colors py-1 px-3 border-b border-amber-600/40">
+                    CLICK PARA ABRIR LA INVITACIÓN
+                </button>
+            </div>
+
+        </div>
+
+        <!-- Reserved Passes Badge Container -->
+        <footer class="text-center z-20 pb-4">
+            <p class="font-cinzel text-xs tracking-widest text-gray-600 uppercase font-medium mb-2">HEMOS RESERVADO</p>
+            
+            <div class="inline-flex items-center justify-center w-14 h-12 rounded-xl bg-white border-2 border-emerald-800 shadow-md my-1">
+                <span id="passesCount" class="font-garamond text-2xl font-bold text-emerald-900">2</span>
+            </div>
+
+            <p class="font-cinzel text-xs tracking-widest text-gray-600 uppercase font-medium mt-2">LUGARES EN SU HONOR</p>
+        </footer>
+
+    </div>
+
+    <!-- MAIN INVITATION CONTENT (Hidden initially, revealed after envelope opens) -->
+    <main id="mainContent" class="hidden opacity-0 max-w-3xl mx-auto w-full px-4 py-8 sm:py-12 transition-all duration-1000 space-y-12">
+        
+        <!-- Header Banner -->
+        <section class="text-center bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-2xl shadow-xl border border-amber-200/60 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-900 via-amber-400 to-emerald-900"></div>
+            
+            <p class="font-cinzel text-xs tracking-[0.3em] text-emerald-900 uppercase font-semibold mb-3">Con la bendición de Dios y nuestros padres</p>
+            <h2 class="font-script text-5xl md:text-7xl text-gold-gradient mb-2">Lizbeth & Noel</h2>
+            <p class="font-garamond text-xl text-gray-700 italic">"Tiene el amor su propio tiempo, su propio espacio y sus propias razones."</p>
+            
+            <div class="my-6 border-t border-b border-amber-200/80 py-4 max-w-md mx-auto">
+                <p class="font-cinzel text-lg md:text-xl tracking-wider text-emerald-900 font-bold">SÁBADO, 17 DE ABRIL DE 2027</p>
+                <p class="font-garamond text-md text-gray-600">Hermosillo, Sonora</p>
             </div>
 
             <!-- Countdown Timer -->
-            <div class="section">
-                <div class="section-title">Cuenta Regresiva</div>
-                <div class="countdown-container" id="countdown">
-                    <div class="time-box">
-                        <div class="number" id="days">00</div>
-                        <div class="label">Días</div>
+            <div class="mt-8">
+                <h4 class="font-cinzel text-xs uppercase tracking-widest text-gray-500 mb-4 font-semibold">Faltan únicamente</h4>
+                <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto">
+                    <div class="bg-emerald-900 text-amber-100 p-2 sm:p-3 rounded-lg shadow">
+                        <span id="cdDays" class="block font-garamond text-2xl sm:text-3xl font-bold">00</span>
+                        <span class="font-cinzel text-[10px] uppercase tracking-wider text-amber-200/80">Días</span>
                     </div>
-                    <div class="time-box">
-                        <div class="number" id="hours">00</div>
-                        <div class="label">Horas</div>
+                    <div class="bg-emerald-900 text-amber-100 p-2 sm:p-3 rounded-lg shadow">
+                        <span id="cdHours" class="block font-garamond text-2xl sm:text-3xl font-bold">00</span>
+                        <span class="font-cinzel text-[10px] uppercase tracking-wider text-amber-200/80">Hs</span>
                     </div>
-                    <div class="time-box">
-                        <div class="number" id="minutes">00</div>
-                        <div class="label">Min</div>
+                    <div class="bg-emerald-900 text-amber-100 p-2 sm:p-3 rounded-lg shadow">
+                        <span id="cdMinutes" class="block font-garamond text-2xl sm:text-3xl font-bold">00</span>
+                        <span class="font-cinzel text-[10px] uppercase tracking-wider text-amber-200/80">Min</span>
                     </div>
-                    <div class="time-box">
-                        <div class="number" id="seconds">00</div>
-                        <div class="label">Seg</div>
+                    <div class="bg-emerald-900 text-amber-100 p-2 sm:p-3 rounded-lg shadow">
+                        <span id="cdSeconds" class="block font-garamond text-2xl sm:text-3xl font-bold">00</span>
+                        <span class="font-cinzel text-[10px] uppercase tracking-wider text-amber-200/80">Seg</span>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Locations (Church & Salon) -->
-            <div class="section">
-                <div class="section-title">Dónde & Cuándo</div>
+        <!-- Locations Grid Section -->
+        <section class="grid md:grid-cols-2 gap-6">
+            
+            <!-- Ceremony Card -->
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-emerald-900/10 flex flex-col justify-between text-center hover:shadow-xl transition-shadow">
+                <div>
+                    <div class="w-14 h-14 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-800/20 text-emerald-800">
+                        <i class="fas font-solid fa-church text-2xl"></i>
+                    </div>
+                    <h3 class="font-cinzel text-xl font-bold text-emerald-900 mb-1">Ceremonia Religiosa</h3>
+                    <p class="font-garamond text-lg font-semibold text-amber-700 mb-3">06:00 PM</p>
+                    <p class="font-montserrat font-medium text-gray-800 text-sm">Parroquia Santa Eduwiges</p>
+                    <p class="font-garamond text-gray-600 text-sm mt-1">Hermosillo, Sonora</p>
+                </div>
+                <div class="mt-6">
+                    <a href="https://www.google.com/maps/place/Parroquia+Santa+Eduwiges/@29.0781394,-110.9679341,14z/data=!4m10!1m2!2m1!1ssanta+eduwiges+iglesia!3m6!1s0x86ce842274e2d679:0x3db108a307663f13!8m2!3d29.100841!4d-110.95694" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-emerald-900 text-amber-100 font-cinzel text-xs tracking-wider uppercase hover:bg-emerald-800 transition-colors shadow">
+                        <i class="fas fa-location-dot"></i> Ver en Google Maps
+                    </a>
+                </div>
+            </div>
+
+            <!-- Reception Card -->
+            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-emerald-900/10 flex flex-col justify-between text-center hover:shadow-xl transition-shadow">
+                <div>
+                    <div class="w-14 h-14 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-800/20 text-emerald-800">
+                        <i class="fas fa-glass-cheers text-2xl"></i>
+                    </div>
+                    <h3 class="font-cinzel text-xl font-bold text-emerald-900 mb-1">Recepción</h3>
+                    <p class="font-garamond text-lg font-semibold text-amber-700 mb-3">08:00 PM</p>
+                    <p class="font-montserrat font-medium text-gray-800 text-sm">Salón Rose Garden</p>
+                    <p class="font-garamond text-gray-600 text-sm mt-1">Hermosillo, Sonora</p>
+                </div>
+                <div class="mt-6">
+                    <a href="https://maps.google.com/?q=Sal%C3%B3n+Rose+Garden+Hermosillo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-emerald-900 text-amber-100 font-cinzel text-xs tracking-wider uppercase hover:bg-emerald-800 transition-colors shadow">
+                        <i class="fas fa-location-dot"></i> Ver en Google Maps
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Timeline Section -->
+        <section class="bg-white/90 p-8 rounded-2xl shadow-lg border border-amber-200/60">
+            <h3 class="font-cinzel text-2xl font-bold text-center text-emerald-900 mb-8 uppercase tracking-wider">Itinerario de Nuestra Boda</h3>
+            
+            <div class="relative border-l-2 border-emerald-800/30 ml-4 md:ml-32 space-y-8">
                 
-                <!-- Church -->
-                <div class="event-card">
-                    <h3>Ceremonia Religiosa</h3>
-                    <p class="time-text">06:00 PM</p>
-                    <p><strong>Parroquia Santa Eduwiges</strong></p>
-                    <p>Hermosillo, Sonora</p>
-                    <br>
-                    <a href="https://www.google.com/maps/place/Parroquia+Santa+Eduwiges/@29.0781394,-110.9679341,14z/data=!4m10!1m2!2m1!1ssanta+eduwiges+iglesia!3m6!1s0x86ce842274e2d679:0x3db108a307663f13!8m2!3d29.100841!4d-110.95694!15sChZzYW50YSBlZHV3aWdlcyBpZ2xlc2lhWhgiFnNhbnRhIGVkdXdpZ2VzIGlnbGVzaWGSAQ9jYXRob2xpY19jaHVyY2iaASRDaGREU1VoTk1HOW5TMFZKUTBGblNVUlNOMjlMV21wblJSQULgAQD6AQQIABAt!16s%2Fg%2F1tcx1zcy?entry=ttu&g_ep=EgoyMDI2MTAwNy4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn-gold">Ver en Google Maps</a>
+                <!-- Event 1 -->
+                <div class="relative pl-6">
+                    <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-800 border-2 border-white"></span>
+                    <span class="md:absolute md:-left-32 md:top-1 font-garamond font-bold text-lg text-amber-700">06:00 PM</span>
+                    <h4 class="font-cinzel font-semibold text-emerald-900 text-base">Misa / Ceremonia Religiosa</h4>
+                    <p class="font-montserrat text-xs text-gray-600 mt-1">Parroquia Santa Eduwiges</p>
                 </div>
 
-                <!-- Reception -->
-                <div class="event-card">
-                    <h3>Recepción</h3>
-                    <p class="time-text">08:00 PM</p>
-                    <p><strong>Salón Rose Garden</strong></p>
-                    <p>Hermosillo, Sonora</p>
-                    <br>
-                    <a href="https://maps.google.com/?q=Salon+Rose+Garden+Hermosillo" target="_blank" class="btn-gold">Ver en Google Maps</a>
+                <!-- Event 2 -->
+                <div class="relative pl-6">
+                    <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-800 border-2 border-white"></span>
+                    <span class="md:absolute md:-left-32 md:top-1 font-garamond font-bold text-lg text-amber-700">08:00 PM</span>
+                    <h4 class="font-cinzel font-semibold text-emerald-900 text-base">Cóctel de Bienvenida</h4>
+                    <p class="font-montserrat text-xs text-gray-600 mt-1">Llegada de invitados a Salón Rose Garden</p>
                 </div>
+
+                <!-- Event 3 -->
+                <div class="relative pl-6">
+                    <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-800 border-2 border-white"></span>
+                    <span class="md:absolute md:-left-32 md:top-1 font-garamond font-bold text-lg text-amber-700">09:00 PM</span>
+                    <h4 class="font-cinzel font-semibold text-emerald-900 text-base">Entrada de Novios & Banquete</h4>
+                    <p class="font-montserrat text-xs text-gray-600 mt-1">Cena formal e inicio del brindis</p>
+                </div>
+
+                <!-- Event 4 -->
+                <div class="relative pl-6">
+                    <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-800 border-2 border-white"></span>
+                    <span class="md:absolute md:-left-32 md:top-1 font-garamond font-bold text-lg text-amber-700">10:00 PM</span>
+                    <h4 class="font-cinzel font-semibold text-emerald-900 text-base">Primer Baile & Fiesta</h4>
+                    <p class="font-montserrat text-xs text-gray-600 mt-1">Apertura de pista de baile y celebración</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Dresscode & Gift Cards -->
+        <section class="grid md:grid-cols-2 gap-6">
+            <!-- Dresscode -->
+            <div class="bg-emerald-900 text-amber-100 p-6 rounded-2xl text-center flex flex-col items-center justify-center border border-amber-300/30">
+                <i class="fas fa-user-tie text-3xl text-amber-300 mb-3"></i>
+                <h4 class="font-cinzel text-lg font-bold tracking-wider uppercase mb-1">Código de Vestimenta</h4>
+                <p class="font-garamond text-xl font-semibold text-amber-200">Riguroso Etiqueta</p>
+                <p class="font-montserrat text-xs text-amber-100/70 mt-2">Traje oscuro / Vestido largo</p>
             </div>
 
-            <!-- Itinerary -->
-            <div class="section">
-                <div class="section-title">Itinerario</div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-time">06:00 PM</div>
-                        <div class="timeline-desc">Ceremonia Religiosa (Parroquia Santa Eduwiges)</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-time">08:00 PM</div>
-                        <div class="timeline-desc">Cóctel de Bienvenida (Salón Rose Garden)</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-time">09:00 PM</div>
-                        <div class="timeline-desc">Entrada de los Novios & Banquete</div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-time">10:00 PM</div>
-                        <div class="timeline-desc">Primer Baile & Fiesta</div>
-                    </div>
-                </div>
+            <!-- Envelope Rain / Gift -->
+            <div class="bg-emerald-900 text-amber-100 p-6 rounded-2xl text-center flex flex-col items-center justify-center border border-amber-300/30">
+                <i class="fas fa-envelope-open-text text-3xl text-amber-300 mb-3"></i>
+                <h4 class="font-cinzel text-lg font-bold tracking-wider uppercase mb-1">Mesa de Regalos</h4>
+                <p class="font-garamond text-xl font-semibold text-amber-200">Lluvia de Sobres</p>
+                <p class="font-montserrat text-xs text-amber-100/70 mt-2">Su presencia es nuestro mejor regalo. Si desean realizarnos un obsequio, dispondremos de un buzón en la recepción.</p>
             </div>
+        </section>
 
-            <!-- Dress Code -->
-            <div class="section">
-                <div class="section-title">Código de Vestimenta</div>
-                <div class="info-box">
-                    <p><strong>RIGUROSO ETIQUETA / ELEGANTE</strong></p>
-                    <p style="margin-top: 6px; font-size: 12px; color: var(--text-muted);">
-                        Agradecemos reservar el color blanco exclusivamente para la novia.
-                    </p>
+        <!-- WhatsApp RSVP Confirmation Form -->
+        <section class="bg-white p-8 rounded-2xl shadow-xl border border-emerald-900/20 text-center">
+            <i class="fab fa-whatsapp text-4xl text-emerald-600 mb-3"></i>
+            <h3 class="font-cinzel text-2xl font-bold text-emerald-900 uppercase tracking-wider mb-2">Confirmación de Asistencia</h3>
+            <p class="font-garamond text-gray-600 mb-6">Por favor confirma tu presencia antes del 15 de Marzo de 2027.</p>
+
+            <form id="rsvpForm" onsubmit="sendWhatsApp(event)" class="max-w-md mx-auto space-y-4 text-left">
+                <div>
+                    <label for="fullName" class="block font-cinzel text-xs font-bold text-gray-700 uppercase mb-1">Nombre Completo</label>
+                    <input type="text" id="fullName" required placeholder="Ej. María López" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-800 focus:border-transparent outline-none font-montserrat text-sm transition">
                 </div>
-            </div>
 
-            <!-- Envelope Shower / Gift Registry -->
-            <div class="section">
-                <div class="section-title">Sugerencia de Regalos</div>
-                <div class="info-box">
-                    <p><strong>LLUVIA DE SOBRES</strong></p>
-                    <p style="margin-top: 8px; font-size: 12px; color: var(--text-muted);">
-                        Su presencia es nuestro mejor regalo. Si desean hacernos un presente, dispondremos de un buzón para sobres el día del evento.
-                    </p>
+                <div>
+                    <label for="attendingCount" class="block font-cinzel text-xs font-bold text-gray-700 uppercase mb-1">Número de Asistentes</label>
+                    <select id="attendingCount" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-800 focus:border-transparent outline-none font-montserrat text-sm bg-white transition">
+                        <!-- Options populated dynamically based on URL parameter ?number=X -->
+                    </select>
                 </div>
-            </div>
 
-            <!-- RSVP Form -->
-            <div class="section">
-                <div class="section-title">Confirmar Asistencia</div>
-                <div class="rsvp-form">
-                    <div class="form-group">
-                        <label for="guest-name">Nombre Completo:</label>
-                        <input type="text" id="guest-name" placeholder="Ej. Juan Pérez" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="guest-count">Personas que asistirán:</label>
-                        <select id="guest-count">
-                            <!-- Options dynamically populated based on URL parameter -->
-                        </select>
-                    </div>
-                    <button type="button" class="btn-whatsapp" onclick="sendRSVP()">
-                        Confirmar por WhatsApp
-                    </button>
-                </div>
-            </div>
+                <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-emerald-800 text-amber-100 font-cinzel text-xs font-bold tracking-widest uppercase hover:bg-emerald-900 transition-all duration-300 shadow-lg flex items-center justify-center gap-2">
+                    <i class="fab fa-whatsapp text-lg"></i> Confirmar por WhatsApp
+                </button>
+            </form>
+        </section>
 
-            <footer>
-                <p>Lizbeth & Noel — 2027</p>
-            </footer>
+        <footer class="text-center py-6 border-t border-amber-200">
+            <p class="font-script text-3xl text-gold-gradient">Lizbeth & Noel</p>
+            <p class="font-cinzel text-[10px] tracking-widest text-gray-500 uppercase mt-1">¡Esperamos contar con tu presencia!</p>
+        </footer>
 
-        </div>
-    </div>
+    </main>
 
     <script>
-        // --- Dynamic Guest Count from URL Parameter (?number=X) ---
-        const urlParams = new URLSearchParams(window.location.search);
-        let guestNumber = parseInt(urlParams.get('number')) || 2; // Default 2
+        // Global State & URL Parameters Handling
+        let passesCount = 2; // Default limit
+        const targetDate = new Date("April 17, 2027 18:00:00").getTime();
 
-        document.getElementById('guest-count-display').textContent = guestNumber;
-
-        // Populate RSVP select options up to the max guests
-        const selectCount = document.getElementById('guest-count');
-        for (let i = 1; i <= guestNumber; i++) {
-            const option = document.createElement('option');
-            option.value = i;
-            option.textContent = `${i} ${i === 1 ? 'Persona' : 'Personas'}`;
-            selectCount.appendChild(option);
-        }
-
-        // --- Envelope Open Logic & Audio Autoplay ---
-        const envelopeBtn = document.getElementById('envelope-btn');
-        const envelopeScreen = document.getElementById('envelope-screen');
-        const mainContent = document.getElementById('main-content');
-        const bgMusic = document.getElementById('bg-music');
-        const musicToggle = document.getElementById('music-toggle');
-        const iconPlay = document.getElementById('music-icon-play');
-        const iconPause = document.getElementById('music-icon-pause');
-
-        let isPlaying = false;
-
-        envelopeBtn.addEventListener('click', () => {
-            envelopeBtn.classList.add('open');
+        window.addEventListener('DOMContentLoaded', () => {
+            // Read ?number=X from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const numParam = urlParams.get('number') || urlParams.get('pases') || urlParams.get('pass');
             
-            // Play Audio
-            bgMusic.play().then(() => {
-                isPlaying = true;
-                updateAudioIcon();
-            }).catch(e => console.log('Audio autoplay prevented:', e));
+            if (numParam && !isNaN(numParam) && parseInt(numParam) > 0) {
+                passesCount = parseInt(numParam);
+            }
 
-            // Hide Screen & Reveal Content
+            // Update DOM badge
+            const badgeEl = document.getElementById('passesCount');
+            if (badgeEl) badgeEl.innerText = passesCount;
+
+            // Populate RSVP select dropdown
+            const selectEl = document.getElementById('attendingCount');
+            if (selectEl) {
+                selectEl.innerHTML = '';
+                for (let i = 1; i <= passesCount; i++) {
+                    const opt = document.createElement('option');
+                    opt.value = i;
+                    opt.innerText = `${i} ${i === 1 ? 'Persona' : 'Personas'}`;
+                    selectEl.appendChild(opt);
+                }
+            }
+
+            // Start countdown loop
+            initCountdown();
+        });
+
+        // Open Envelope Animation & Reveal Main Section
+        function openInvitation() {
+            const cover = document.getElementById('coverScreen');
+            const envelope = document.getElementById('envelopeContainer');
+            const mainContent = document.getElementById('mainContent');
+
+            // Add CSS class to fold top flap back
+            envelope.classList.add('envelope-open');
+
+            // Autoplay Audio
+            const audio = document.getElementById('bgAudio');
+            if (audio) {
+                audio.play().catch(e => console.log('Audio autoplay prevented by browser permissions:', e));
+            }
+
+            // Smooth transition from cover screen to main content
             setTimeout(() => {
-                envelopeScreen.classList.add('hidden');
-                mainContent.classList.add('visible');
-            }, 1000);
-        });
+                cover.classList.add('opacity-0', 'pointer-events-none');
+                
+                setTimeout(() => {
+                    cover.classList.add('hidden');
+                    mainContent.classList.remove('hidden');
+                    
+                    // Fade in main section smoothly
+                    setTimeout(() => {
+                        mainContent.classList.remove('opacity-0');
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }, 50);
 
-        // Audio Toggle
-        musicToggle.addEventListener('click', () => {
-            if (isPlaying) {
-                bgMusic.pause();
-                isPlaying = false;
-            } else {
-                bgMusic.play();
-                isPlaying = true;
-            }
-            updateAudioIcon();
-        });
+                }, 600);
+            }, 700);
+        }
 
-        function updateAudioIcon() {
-            if (isPlaying) {
-                iconPlay.style.display = 'none';
-                iconPause.style.display = 'block';
+        // Toggle Audio Playback
+        function toggleAudio() {
+            const audio = document.getElementById('bgAudio');
+            const icon = document.getElementById('audioIcon');
+
+            if (audio.paused) {
+                audio.play();
+                icon.className = 'fas fa-music text-lg';
             } else {
-                iconPlay.style.display = 'block';
-                iconPause.style.display = 'none';
+                audio.pause();
+                icon.className = 'fas fa-volume-mute text-lg';
             }
         }
 
-        // --- Countdown Logic ---
-        const targetDate = new Date('April 17, 2027 18:00:00').getTime();
+        // Live Countdown Clock
+        function initCountdown() {
+            function updateClock() {
+                const now = new Date().getTime();
+                const difference = targetDate - now;
 
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const difference = targetDate - now;
+                if (difference > 0) {
+                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-            if (difference > 0) {
-                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-                document.getElementById('days').textContent = days < 10 ? '0' + days : days;
-                document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
-                document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
-                document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+                    document.getElementById('cdDays').innerText = String(days).padStart(2, '0');
+                    document.getElementById('cdHours').innerText = String(hours).padStart(2, '0');
+                    document.getElementById('cdMinutes').innerText = String(minutes).padStart(2, '0');
+                    document.getElementById('cdSeconds').innerText = String(seconds).padStart(2, '0');
+                } else {
+                    document.getElementById('cdDays').innerText = "00";
+                    document.getElementById('cdHours').innerText = "00";
+                    document.getElementById('cdMinutes').innerText = "00";
+                    document.getElementById('cdSeconds').innerText = "00";
+                }
             }
+
+            updateClock();
+            setInterval(updateClock, 1000);
         }
 
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+        // Format and redirect to WhatsApp RSVP
+        function sendWhatsApp(e) {
+            e.preventDefault();
+            const name = document.getElementById('fullName').value.trim();
+            const count = document.getElementById('attendingCount').value;
 
-        // --- WhatsApp RSVP Logic ---
-        function sendRSVP() {
-            const name = document.getElementById('guest-name').value.trim();
-            const count = document.getElementById('guest-count').value;
+            if (!name) return;
 
-            if (!name) {
-                alert('Por favor, escribe tu nombre completo para confirmar.');
-                return;
-            }
-
-            const phoneNumber = "526620000000"; // Reemplazar con el número real de WhatsApp
-            const message = `¡Hola! Confirmo mi asistencia a la Boda de Lizbeth & Noel.\n\n*Nombre:* ${name}\n*Personas que asistiremos:* ${count}`;
-            const encodedMessage = encodeURIComponent(message);
+            const phone = "5216620000000"; // Generic phone target
+            const text = `¡Hola! Confirmo mi asistencia a la Boda de Lizbeth & Noel. Nombre: ${name}, Personas que asistiremos: ${count}`;
+            const encodedText = encodeURIComponent(text);
             
-            window.open(`https://wa.me/${phoneNumber}?text=${encodedMessage}`, '_blank');
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedText}`;
+            window.open(whatsappUrl, '_blank');
         }
     </script>
 </body>
