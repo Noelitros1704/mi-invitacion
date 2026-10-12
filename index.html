@@ -3,333 +3,796 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invitación Digital - Boda Lizbeth & Noel</title>
+    <title>Boda Lizbeth & Noel - Invitación Digital</title>
+    <!-- Google Fonts for Elegant Serif & Cursive Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
+        :root {
+            --emerald-dark: #0b3d2e;
+            --emerald-medium: #15523f;
+            --emerald-light: #246852;
+            --gold-light: #fef0be;
+            --gold-primary: #d4af37;
+            --gold-dark: #8c6a08;
+            --paper-bg: #FAF7F2;
+            --text-dark: #1d2b26;
+            --text-muted: #53645e;
+        }
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fdfaf6;
-            color: #4a4a4a;
-            text-align: center;
-            overflow-x: hidden;
-        }
-
-        /* --- PANTALLA DEL SOBRE --- */
-        #envelope-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: #f4eae1;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #121212;
+            color: var(--text-dark);
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 1000;
-            transition: opacity 1s ease, visibility 1s ease;
+            min-height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Phone frame simulation for screen centering */
+        .mobile-container {
+            width: 100%;
+            max-width: 430px;
+            min-height: 100vh;
+            background-color: var(--paper-bg);
+            /* Linen Paper Texture background simulation using SVG pattern */
+            background-image: radial-gradient(#d6cbb8 0.5px, transparent 0.5px), radial-gradient(#d6cbb8 0.5px, var(--paper-bg) 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            position: relative;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+            overflow-x: hidden;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .floral-corner {
+            position: absolute;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .floral-top {
+            top: 0;
+            left: 0;
+            width: 210px;
+            height: auto;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.06));
+        }
+
+        .floral-bottom {
+            bottom: 0;
+            right: 0;
+            width: 210px;
+            height: auto;
+            filter: drop-shadow(-2px -4px 6px rgba(0,0,0,0.06));
+        }
+
+        #envelope-screen {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 45px 20px 35px 20px;
+            position: relative;
+            z-index: 20;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 1s ease;
+        }
+
+        /* Header Text Elements matching the prompt image */
+        .header-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.35em;
+            letter-spacing: 5px;
+            color: var(--emerald-dark);
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        /* Gold Foil Cursive Calligraphy Typography */
+        .header-names {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.2em;
+            line-height: 1.1;
+            margin: 10px 0 5px 0;
+            text-align: center;
+            background: linear-gradient(135deg, #a88019 0%, #f3e5ab 25%, #d4af37 50%, #fef0be 75%, #8c6a08 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0px 1px 1px rgba(0,0,0,0.15));
+            padding: 0 10px;
+        }
+
+        .header-date {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.25em;
+            letter-spacing: 2px;
+            color: var(--emerald-dark);
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 10px;
         }
 
         .envelope-wrapper {
             position: relative;
+            width: 100%;
+            max-width: 320px;
+            margin: 10px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             cursor: pointer;
         }
 
-        /* Sobre */
-        .envelope {
-            width: 280px;
-            height: 180px;
-            background-color: #e2d1c3;
-            border-radius: 10px;
+        .envelope-box {
             position: relative;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            width: 100%;
+            height: 195px;
+            background: linear-gradient(145deg, #0a382a 0%, #0d4634 60%, #072a1f 100%);
+            border-radius: 6px;
+            box-shadow: 0 18px 35px rgba(11, 61, 46, 0.35), 0 5px 15px rgba(0,0,0,0.15);
+            overflow: visible;
             display: flex;
             justify-content: center;
             align-items: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        /* Sello de cera */
-        .wax-seal {
-            padding: 10px 15px;
-            min-width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #d4af37, #aa7c11);
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #ffffff;
-            font-family: serif;
-            font-weight: bold;
-            font-size: 1.1em;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            border: 2px solid #f8e5ad;
-            transition: transform 0.3s ease;
+        .envelope-wrapper:hover .envelope-box {
+            transform: translateY(-4px);
+            box-shadow: 0 22px 40px rgba(11, 61, 46, 0.45);
+        }
+
+        /* Envelope Inner Flaps Geometry */
+        .flap-top {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 160px solid transparent;
+            border-right: 160px solid transparent;
+            border-top: 110px solid #104e3b;
+            transform-origin: top;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 4;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+        }
+
+        .flap-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 160px solid #0b3d2e;
+            border-right: 160px solid #0b3d2e;
+            border-bottom: 95px solid #0e4937;
+            border-top: 95px solid transparent;
+            border-radius: 0 0 6px 6px;
+            z-index: 3;
+        }
+
+        .flap-left {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-top: 97px solid transparent;
+            border-bottom: 97px solid transparent;
+            border-left: 160px solid #0a382a;
+            border-radius: 6px 0 0 6px;
             z-index: 2;
         }
 
-        .envelope-wrapper:hover .wax-seal {
-            transform: scale(1.1);
+        .flap-right {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-top: 97px solid transparent;
+            border-bottom: 97px solid transparent;
+            border-right: 160px solid #093326;
+            border-radius: 0 6px 6px 0;
+            z-index: 2;
         }
 
-        .open-instruction {
-            margin-top: 25px;
-            font-size: 0.9em;
-            color: #8c7a6b;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.5; }
-            50% { opacity: 1; }
-            100% { opacity: 0.5; }
-        }
-
-        /* --- CONTENIDO DE LA INVITACIÓN --- */
-        #invitation-content {
-            opacity: 0;
-            transition: opacity 1.2s ease 0.5s;
-            padding: 20px;
-            display: none;
-        }
-
-        .container {
-            max-width: 450px;
-            margin: 0 auto;
-            background: #ffffff;
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
-
-        h1 {
-            font-size: 2.3em;
-            color: #d4af37;
-            margin-bottom: 10px;
-            font-family: serif;
-        }
-
-        h2 {
-            font-weight: 300;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-size: 1.1em;
-            color: #7d7d7d;
-        }
-
-        p {
-            line-height: 1.6;
-            font-size: 0.95em;
-        }
-
-        /* Cuenta Regresiva */
-        .timer-container {
+        /* Realistic Wax Seal */
+        .wax-seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 72px;
+            height: 72px;
+            background: radial-gradient(circle at 35% 35%, #ffe699 0%, #d4af37 45%, #8c6a08 85%, #594200 100%);
+            border-radius: 50%;
+            z-index: 5;
             display: flex;
-            justify-content: space-around;
-            margin: 20px 0;
-            background: #f8f4ef;
-            padding: 15px;
-            border-radius: 12px;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.45), inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.4);
+            border: 1px solid #fef0be;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .timer-box {
+        .wax-seal-inner {
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: 1.5px dashed rgba(100, 75, 10, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: radial-gradient(circle at 40% 40%, #e6be44 0%, #a88019 100%);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.3);
+        }
+
+        .wax-seal-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.7em;
+            color: #3b2b00;
+            text-shadow: 0px 1px 1px rgba(255, 255, 255, 0.5);
+            font-weight: bold;
+        }
+
+        .envelope-wrapper:hover .wax-seal {
+            transform: translate(-50%, -50%) scale(1.08) rotate(4deg);
+        }
+
+        .instruction-group {
             display: flex;
             flex-direction: column;
+            align-items: center;
+            margin-top: 15px;
+            position: relative;
         }
 
-        .timer-number {
-            font-size: 1.5em;
-            font-weight: bold;
-            color: #b8860b;
+        .arrow-svg {
+            width: 65px;
+            height: 45px;
+            margin-bottom: 2px;
+            animation: pulseArrow 2s infinite ease-in-out;
         }
 
-        .timer-label {
-            font-size: 0.75em;
+        .instruction-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9em;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--emerald-dark);
             text-transform: uppercase;
-            color: #888;
+            text-align: center;
+            line-height: 1.3;
         }
 
-        /* Secciones */
-        .card {
-            border: 1px solid #eee;
-            padding: 15px;
+        .reservation-badge {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeInUp 1.2s ease-out;
+        }
+
+        .reservation-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9em;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            color: var(--emerald-dark);
+            text-transform: uppercase;
+            margin: 4px 0;
+        }
+
+        .reservation-box {
+            border: 2px solid var(--emerald-dark);
             border-radius: 12px;
-            margin: 15px 0;
-            background: #fafafa;
+            padding: 4px 22px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.04);
+            margin: 4px 0;
         }
 
-        .card h3 {
-            margin-top: 0;
-            color: #4a4a4a;
-            font-size: 1.1em;
+        .reservation-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--emerald-dark);
+            line-height: 1;
         }
 
-        /* Botones */
-        .btn {
-            display: block;
+        #invitation-content {
+            display: none;
+            opacity: 0;
             width: 100%;
-            padding: 12px 0;
-            margin: 10px 0;
-            border: none;
-            border-radius: 25px;
+            padding: 30px 20px 50px 20px;
+            z-index: 30;
+            transition: opacity 1.2s ease;
+        }
+
+        .card-container {
+            background-color: #ffffff;
+            border-radius: 20px;
+            padding: 35px 22px;
+            box-shadow: 0 12px 30px rgba(11, 61, 46, 0.08);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            text-align: center;
+            position: relative;
+        }
+
+        .gold-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold-primary), transparent);
+            margin: 25px auto;
+            width: 80%;
+        }
+
+        .quote-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-size: 1.1em;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 15px 0;
+        }
+
+        /* Audio Music Player Bar */
+        .music-card {
+            background: #faf7f2;
+            border: 1px solid rgba(11, 61, 46, 0.15);
+            border-radius: 14px;
+            padding: 15px;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .music-title {
+            font-family: 'Cormorant Garamond', serif;
             font-size: 1em;
-            font-weight: bold;
-            text-decoration: none;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            color: var(--emerald-dark);
+            text-transform: uppercase;
+        }
+
+        .music-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-play {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--emerald-dark);
+            color: #ffffff;
+            border: none;
             cursor: pointer;
-            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(11, 61, 46, 0.3);
             transition: transform 0.2s;
         }
 
-        .btn:active {
-            transform: scale(0.98);
+        .btn-play:active {
+            transform: scale(0.95);
+        }
+
+        /* Countdown Grid */
+        .countdown-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin: 25px 0;
+            background: linear-gradient(135deg, var(--emerald-dark) 0%, var(--emerald-medium) 100%);
+            padding: 18px 10px;
+            border-radius: 14px;
+            box-shadow: 0 8px 20px rgba(11, 61, 46, 0.25);
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .countdown-val {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6em;
+            font-weight: 700;
+            color: var(--gold-light);
+        }
+
+        .countdown-lbl {
+            font-size: 0.65em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.85);
+            margin-top: 2px;
+        }
+
+        /* Detail Cards */
+        .detail-box {
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            background-color: #fdfcf9;
+            padding: 22px 18px;
+            border-radius: 14px;
+            margin: 18px 0;
+        }
+
+        .detail-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2em;
+            color: var(--emerald-dark);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .detail-box p {
+            font-size: 0.9em;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 4px 0;
+        }
+
+        .detail-box strong {
+            color: var(--text-dark);
+        }
+
+        /* Buttons Styling */
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 14px 18px;
+            margin-top: 14px;
+            border-radius: 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--emerald-dark) 0%, var(--emerald-medium) 100%);
+            color: #ffffff;
+            border: 1px solid var(--gold-primary);
         }
 
         .btn-whatsapp {
-            background-color: #25d366;
-            color: white;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            color: #ffffff;
+            border: none;
         }
 
-        .btn-map {
-            background-color: #4285f4;
-            color: white;
+        .btn-action:active {
+            transform: scale(0.97);
         }
 
-        audio {
-            width: 100%;
-            margin-top: 10px;
+        /* Animations */
+        @keyframes pulseArrow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Envelope Open Animation state */
+        .envelope-wrapper.open .flap-top {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .envelope-wrapper.open .wax-seal {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(1.6);
+            transition: opacity 0.4s ease, transform 0.4s ease;
         }
     </style>
 </head>
 <body>
 
-<!-- PANTALLA DEL SOBRE -->
-<div id="envelope-screen" onclick="openEnvelope()">
-    <div class="envelope-wrapper">
-        <div class="envelope">
-            <div class="wax-seal">L&N</div>
+    <div class="mobile-container">
+
+        <svg class="floral-corner floral-top" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.95">
+                <!-- Dark Emerald Leaves -->
+                <path d="M-20 -20C30 10 70 40 85 90C40 85 10 50 -20 -20Z" fill="#0b3d2e"/>
+                <path d="M20 -20C70 20 120 40 145 80C100 80 50 45 20 -20Z" fill="#15523f"/>
+                <path d="M-20 20C10 70 30 120 70 155C65 105 35 60 -20 20Z" fill="#082e22"/>
+                <!-- Cream White Flower Petals -->
+                <circle cx="105" cy="55" r="22" fill="#FAF5E8"/>
+                <circle cx="85" cy="45" r="18" fill="#F4ECE0"/>
+                <circle cx="120" cy="70" r="18" fill="#F8F2E6"/>
+                <circle cx="100" cy="75" r="14" fill="#EFE5D3"/>
+                <circle cx="102" cy="60" r="7" fill="#d4af37"/>
+                <!-- Gold Foil Accent Line Art Leaves -->
+                <path d="M10 -10Q80 30 120 120" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                <path d="M50 25Q90 60 105 100" stroke="#d4af37" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+                <path d="M80 15Q130 50 160 90" stroke="#d4af37" stroke-width="1" stroke-linecap="round" fill="none"/>
+            </g>
+        </svg>
+
+        <svg class="floral-corner floral-bottom" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.95" transform="rotate(180 110 110)">
+                <path d="M-20 -20C30 10 70 40 85 90C40 85 10 50 -20 -20Z" fill="#0b3d2e"/>
+                <path d="M20 -20C70 20 120 40 145 80C100 80 50 45 20 -20Z" fill="#15523f"/>
+                <path d="M-20 20C10 70 30 120 70 155C65 105 35 60 -20 20Z" fill="#082e22"/>
+                <circle cx="105" cy="55" r="22" fill="#FAF5E8"/>
+                <circle cx="85" cy="45" r="18" fill="#F4ECE0"/>
+                <circle cx="120" cy="70" r="18" fill="#F8F2E6"/>
+                <circle cx="100" cy="75" r="14" fill="#EFE5D3"/>
+                <circle cx="102" cy="60" r="7" fill="#d4af37"/>
+                <path d="M10 -10Q80 30 120 120" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                <path d="M50 25Q90 60 105 100" stroke="#d4af37" stroke-width="1.2" stroke-linecap="round" fill="none"/>
+            </g>
+        </svg>
+
+        <div id="envelope-screen">
+            <!-- Header Text -->
+            <div>
+                <div class="header-title">Nuestra Boda</div>
+                <div class="header-names">Lizbeth & Noel</div>
+                <div class="header-date">17 de ABRIL del 2027</div>
+            </div>
+
+            <!-- Interactive Envelope with Wax Seal -->
+            <div class="envelope-wrapper" id="envelope-interactive" onclick="openInvitation()">
+                <div class="envelope-box">
+                    <div class="flap-top"></div>
+                    <div class="flap-bottom"></div>
+                    <div class="flap-left"></div>
+                    <div class="flap-right"></div>
+                    <div class="wax-seal">
+                        <div class="wax-seal-inner">
+                            <span class="wax-seal-text">L&N</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashed Arrow & Click Instruction -->
+                <div class="instruction-group">
+                    <svg class="arrow-svg" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Curved Dashed Arrow pointing up towards the wax seal -->
+                        <path d="M 15 50 C 5 30, 25 10, 48 24" stroke="#d4af37" stroke-width="2" stroke-dasharray="4 3" fill="none" stroke-linecap="round"/>
+                        <polygon points="45,18 56,26 48,30" fill="#d4af37"/>
+                    </svg>
+                    <div class="instruction-text">
+                        Click para abrir la<br>invitación
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reserved Seats Badge -->
+            <div class="reservation-badge">
+                <div class="reservation-label">Hemos Reservado</div>
+                <div class="reservation-box">
+                    <span class="reservation-number">2</span>
+                </div>
+                <div class="reservation-label">Lugares en su honor</div>
+            </div>
         </div>
+
+        <div id="invitation-content">
+            <div class="card-container">
+                <div class="header-title" style="font-size: 1em;">¡Nos Casamos!</div>
+                <div class="header-names" style="font-size: 3.5em;">Lizbeth & Noel</div>
+
+                <p class="quote-text">
+                    "El amor no contempla con los ojos, sino con el alma. Acompáñanos a celebrar el comienzo de nuestro para siempre."
+                </p>
+
+                <div class="gold-divider"></div>
+
+                <!-- Music Player Section -->
+                <div class="music-card">
+                    <div class="music-title">🎵 Canción Especial</div>
+                    <div class="music-controls">
+                        <button class="btn-play" id="play-btn" onclick="toggleAudio()">
+                            <svg id="play-icon" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M8 5v14l11-7z"/>
+                            </svg>
+                        </button>
+                        <span style="font-size: 0.85em; color: var(--text-dark); font-weight: 500;">Eso y Más - Joan Sebastian</span>
+                    </div>
+                    <audio id="wedding-audio" loop preload="auto">
+                        <source src="musica3.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+
+                <!-- Countdown Timer -->
+                <div class="countdown-grid">
+                    <div class="countdown-item">
+                        <span id="cd-days" class="countdown-val">00</span>
+                        <span class="countdown-lbl">Días</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="cd-hours" class="countdown-val">00</span>
+                        <span class="countdown-lbl">Horas</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="cd-mins" class="countdown-val">00</span>
+                        <span class="countdown-lbl">Min</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span id="cd-secs" class="countdown-val">00</span>
+                        <span class="countdown-lbl">Seg</span>
+                    </div>
+                </div>
+
+                <!-- Date & Location -->
+                <div class="detail-box">
+                    <h3>📍 Recepción & Celebración</h3>
+                    <p><strong>Fecha:</strong> Sábado, 17 de Abril del 2027</p>
+                    <p><strong>Hora:</strong> 08:00 PM</p>
+                    <p><strong>Lugar:</strong> Salón de Eventos "Rose Garden"</p>
+                    <p>Av. Navojoa #107, Hermosillo, Sonora</p>
+                    <a href="https://www.google.com/maps/search/?api=1&query=Rose+Garden+Av+Navojoa+Hermosillo+Sonora" target="_blank" class="btn-action btn-gold">
+                        📍 Ver ubicación en Google Maps
+                    </a>
+                </div>
+
+                <!-- Dress Code -->
+                <div class="detail-box">
+                    <h3>👗 Código de Vestimenta</h3>
+                    <p><strong>Riguroso Etiqueta / Elegante</strong></p>
+                    <p style="margin-top: 6px; font-size: 0.85em; color: #8c6a08;">
+                        * Reservamos el color blanco exclusivamente para la novia.
+                    </p>
+                </div>
+
+                <!-- Gift Suggestion -->
+                <div class="detail-box">
+                    <h3>🎁 Lluvia de Sobres</h3>
+                    <p>Su presencia es nuestro mejor regalo. Si desean realizarnos un obsequio, contaremos con una caja de sobres en la entrada del salón.</p>
+                </div>
+
+                <!-- RSVP WhatsApp Button -->
+                <div class="detail-box">
+                    <h3>✉️ Confirmación de Asistencia</h3>
+                    <p>Agradecemos confirmar tu asistencia antes del 15 de Marzo del 2027.</p>
+                    <a href="https://wa.me/526622977259?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20la%20Boda%20de%20Lizbeth%20y%20Noel." target="_blank" class="btn-action btn-whatsapp">
+                        📲 Confirmar por WhatsApp
+                    </a>
+                </div>
+
+                <div class="gold-divider"></div>
+
+                <p style="font-family: 'Cormorant Garamond', serif; font-size: 0.95em; color: var(--emerald-dark); font-weight: 700; letter-spacing: 2px;">
+                    ¡TE ESPERAMOS EN NUESTRO GRAN DÍA!
+                </p>
+            </div>
+        </div>
+
     </div>
-    <p class="open-instruction">✨ Toca el sobre para abrir ✨</p>
-</div>
 
-<!-- CONTENIDO COMPLETO DE LA INVITACIÓN -->
-<div id="invitation-content">
-    <div class="container">
-        <h2>¡Te invitamos a celebrar nuestra Boda!</h2>
-        <h1>Lizbeth & Noel</h1>
+    <script>
+        let isPlaying = false;
+        const audio = document.getElementById('wedding-audio');
 
-        <p>Hay momentos en la vida que son especiales por sí solos, pero compartirlos con las personas que más quieres los hace inolvidables.</p>
+        function openInvitation() {
+            const envelopeWrapper = document.getElementById('envelope-interactive');
+            const envelopeScreen = document.getElementById('envelope-screen');
+            const invitationContent = document.getElementById('invitation-content');
 
-        <!-- Cuenta Regresiva -->
-        <div class="timer-container">
-            <div class="timer-box"><span id="days" class="timer-number">00</span><span class="timer-label">Días</span></div>
-            <div class="timer-box"><span id="hours" class="timer-number">00</span><span class="timer-label">Horas</span></div>
-            <div class="timer-box"><span id="minutes" class="timer-number">00</span><span class="timer-label">Min</span></div>
-            <div class="timer-box"><span id="seconds" class="timer-number">00</span><span class="timer-label">Seg</span></div>
-        </div>
+            // Trigger envelope flap opening animation
+            envelopeWrapper.classList.add('open');
 
-        <!-- Música de fondo -->
-        <div class="card">
-            <h3>🎵 Música de fondo</h3>
-            <audio id="bg-music" controls preload="auto">
-                <source src="musica3.mp3" type="audio/mpeg">
-                Tu navegador no soporta el reproductor de audio.
-            </audio>
-        </div>
+            // Attempt playing audio upon user interaction
+            playAudio();
 
-        <!-- Fecha y Hora -->
-        <div class="card">
-            <h3>📅 ¿Cuándo y Dónde?</h3>
-            <p><strong>Fecha:</strong> 17 de Abril del 2027</p>
-            <p><strong>Hora:</strong> 08:00 PM</p>
-            <p>Salón de Eventos "Rose Garden"</p>
-            <p>Hermosillo, Sonora</p>
-            <a href="https://www.google.com/maps/search/?api=1&query=Rose+Garden+Av+Navojoa+Hermosillo+Sonora" target="_blank" class="btn btn-map">
-                📍 Ver ubicación en Google Maps
-            </a>
-        </div>
-
-        <!-- Código de Vestimenta -->
-        <div class="card">
-            <h3>👗 Código de Vestimenta</h3>
-            <p><strong>Riguroso Etiqueta / Elegante</strong></p>
-            <p>Reservamos el color blanco exclusivamente para la novia.</p>
-        </div>
-
-        <!-- Sugerencia de Regalos -->
-        <div class="card">
-            <h3>🎁 Sugerencia de Regalos</h3>
-            <p>Su presencia es nuestro mejor regalo, pero si desean tener un detalle con nosotros:</p>
-            <p><strong>Lluvia de Sobres:</strong> Habrá una caja en la recepción para sobres de efectivo.</p>
-        </div>
-
-        <!-- Confirmación por WhatsApp -->
-        <div class="card">
-            <h3>✉️ Confirmación</h3>
-            <p>Por favor confirma tu asistencia con nosotros.</p>
-            <a href="https://wa.me/526622977259?text=%C2%A1Hola!%20Confirmo%20mi%20asistencia%20a%20la%20Boda%20de%20Lizbeth%20y%20Noel." target="_blank" class="btn btn-whatsapp">
-                📲 Confirmar asistencia
-            </a>
-        </div>
-    </div>
-</div>
-
-<script>
-    // Función para abrir la carta y reproducir la música
-    function openEnvelope() {
-        const envelopeScreen = document.getElementById('envelope-screen');
-        const invitationContent = document.getElementById('invitation-content');
-        const music = document.getElementById('bg-music');
-
-        envelopeScreen.style.opacity = '0';
-        
-        setTimeout(() => {
-            envelopeScreen.style.display = 'none';
-            invitationContent.style.display = 'block';
+            // Transition from envelope screen to invitation screen
             setTimeout(() => {
-                invitationContent.style.opacity = '1';
-            }, 50);
-        }, 1000);
+                envelopeScreen.style.opacity = '0';
+                envelopeScreen.style.transform = 'translateY(-20px)';
+                
+                setTimeout(() => {
+                    envelopeScreen.style.display = 'none';
+                    invitationContent.style.display = 'block';
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
 
-        // El toque inicial autoriza la reproducción del sonido en navegadores móviles
-        if (music) {
-            music.play().catch(error => {
-                console.log("Se requiere interacción adicional para reproducir audio.");
-            });
-        }
-    }
-
-    // Cuenta Regresiva (17 de Abril del 2027 a las 8:00 PM)
-    const eventDate = new Date(2027, 3, 17, 20, 0, 0).getTime();
-
-    const timer = setInterval(function() {
-        const now = new Date().getTime();
-        const distance = eventDate - now;
-
-        if (distance < 0) {
-            clearInterval(timer);
-            document.querySelector(".timer-container").innerHTML = "<h3>¡Llegó el día!</h3>";
-            return;
+                    setTimeout(() => {
+                        invitationContent.style.opacity = '1';
+                    }, 50);
+                }, 800);
+            }, 600);
         }
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        function playAudio() {
+            if (audio) {
+                audio.play().then(() => {
+                    isPlaying = true;
+                    updateAudioIcon();
+                }).catch(err => {
+                    console.log("Audio playback waiting for user click.");
+                });
+            }
+        }
 
-        document.getElementById("days").innerText = days < 10 ? '0' + days : days;
-        document.getElementById("hours").innerText = hours < 10 ? '0' + hours : hours;
-        document.getElementById("minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
-        document.getElementById("seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
-    }, 1000);
-</script>
+        function toggleAudio() {
+            if (!audio) return;
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+            } else {
+                audio.play();
+                isPlaying = true;
+            }
+            updateAudioIcon();
+        }
 
+        function updateAudioIcon() {
+            const playIcon = document.getElementById('play-icon');
+            if (isPlaying) {
+                // Pause Icon
+                playIcon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+            } else {
+                // Play Icon
+                playIcon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+            }
+        }
+
+        const weddingDate = new Date(2027, 3, 17, 20, 0, 0).getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = weddingDate - now;
+
+            if (diff <= 0) {
+                document.querySelector('.countdown-grid').innerHTML = '<div style="color:#fff; font-family:\'Cormorant Garamond\',serif; grid-column:span 4;">¡Hoy es nuestra boda!</div>';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('cd-days').innerText = days < 10 ? '0' + days : days;
+            document.getElementById('cd-hours').innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById('cd-mins').innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('cd-secs').innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
 </body>
 </html>
