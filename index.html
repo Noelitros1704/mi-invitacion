@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boda Lizbeth & Noel - 17 de Abril, 2027</title>
+    
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
@@ -33,7 +36,6 @@
                             light: '#F3E5AB',
                             DEFAULT: '#D4AF37',
                             dark: '#AA7C11',
-                            metallic: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)'
                         }
                     },
                     fontFamily: {
@@ -48,7 +50,6 @@
     </script>
 
     <style>
-        /* Linen Paper Background Texture */
         .bg-linen {
             background-color: #FAF7F2;
             background-image: radial-gradient(#e2d9ca 0.75px, transparent 0.75px), radial-gradient(#e2d9ca 0.75px, #FAF7F2 0.75px);
@@ -56,7 +57,6 @@
             background-position: 0 0, 15px 15px;
         }
 
-        /* Metallic Gold Gradient Text */
         .text-gold-gradient {
             background: linear-gradient(135deg, #B8860B 0%, #E6CA65 25%, #996515 50%, #F0E68C 75%, #8B6508 100%);
             -webkit-background-clip: text;
@@ -64,11 +64,6 @@
             display: inline-block;
         }
 
-        .gold-border {
-            border-image: linear-gradient(135deg, #BF953F, #FCF6BA, #B38728, #AA771C) 1;
-        }
-
-        /* Wax Seal & Envelope 3D Effects */
         .wax-seal {
             background: radial-gradient(circle at 35% 35%, #f1d77a, #c59b27 40%, #7a5806 85%);
             box-shadow: 0 4px 15px rgba(0,0,0,0.3), inset 0 2px 4px rgba(255,255,255,0.6), inset 0 -3px 6px rgba(0,0,0,0.4);
@@ -86,15 +81,6 @@
             z-index: 5;
         }
 
-        .invitation-letter {
-            transition: transform 1s ease-in-out, opacity 0.8s ease-in-out;
-        }
-
-        .envelope-open .invitation-letter {
-            transform: translateY(-80px) scale(1.02);
-        }
-
-        /* Floating animation for wax seal arrow */
         @keyframes pulse-subtle {
             0%, 100% { transform: translateY(0) scale(1); }
             50% { transform: translateY(-4px) scale(1.03); }
@@ -103,7 +89,6 @@
             animation: pulse-subtle 2.5s infinite ease-in-out;
         }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
         }
@@ -119,13 +104,13 @@
 
 <body class="bg-linen font-montserrat text-gray-800 min-h-screen flex flex-col justify-between selection:bg-emerald-800 selection:text-white">
 
-    <!-- Audio Player (Hidden Audio, Visible Floating Trigger) -->
+    <!-- REPRODUCTOR DE MÚSICA DE FONDO -->
     <audio id="bgAudio" loop preload="auto">
-        <source src="musica3.mp3" type="audio/mpeg">
-        Tu navegador no soporta audio HTML5.
+        <source src="musica.mp3" type="audio/mpeg">
     </audio>
 
-    <button id="audioToggleBtn" onclick="toggleAudio()" class="fixed bottom-5 right-5 z-50 bg-emerald-800 text-amber-200 w-12 h-12 rounded-full shadow-2xl border-2 border-amber-300/60 flex items-center justify-center hover:scale-110 transition-all duration-300 group focus:outline-none">
+    <!-- BOTÓN FLOTANTE DE CONTROL DE AUDIO -->
+    <button id="audioToggleBtn" onclick="toggleAudio()" class="fixed bottom-5 right-5 z-50 bg-emerald-800 text-amber-200 w-12 h-12 rounded-full shadow-2xl border-2 border-amber-300/60 flex items-center justify-center hover:scale-110 transition-all duration-300 group focus:outline-none" title="Música de fondo">
         <i id="audioIcon" class="fas fa-music text-lg group-hover:rotate-12 transition-transform"></i>
         <span class="absolute -top-1 -right-1 flex h-3 w-3">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
@@ -133,23 +118,21 @@
         </span>
     </button>
 
-    <!-- COVER SCREEN (ID: coverScreen) -->
+
+    <!-- APARTADO 1: PANTALLA DE PORTADA Y SOBRE INTERACTIVO -->
     <div id="coverScreen" class="relative min-h-screen w-full flex flex-col justify-between items-center py-8 px-4 overflow-hidden transition-all duration-1000 z-30">
         
-        <!-- Botanical Vector Accents - Top Left -->
+        <!-- Adornos Botánicos Izquierda -->
         <div class="absolute -top-6 -left-6 w-56 h-56 md:w-80 md:h-80 pointer-events-none z-10 opacity-95">
             <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full transform -rotate-12">
-                <!-- Gold Eucalyptus Branches -->
                 <path d="M10 10 Q 90 40 160 110" stroke="#C59B27" stroke-width="1.5" stroke-dasharray="3 2"/>
                 <circle cx="40" cy="22" r="8" fill="#0B3D2E" opacity="0.85"/>
                 <circle cx="75" cy="38" r="11" fill="#12523F" opacity="0.9"/>
                 <circle cx="110" cy="65" r="13" fill="#072B20" opacity="0.95"/>
                 <circle cx="140" cy="98" r="10" fill="#1A6A52" opacity="0.85"/>
-                <!-- White Blossoms -->
                 <path d="M50 80 Q 60 60 70 80 Q 80 90 60 100 Q 40 90 50 80 Z" fill="#FFFDF9" stroke="#E8DFC8" stroke-width="1"/>
                 <circle cx="60" cy="85" r="3" fill="#D4AF37"/>
                 <path d="M20 110 Q 35 95 45 110 Q 50 125 30 130 Q 15 120 20 110 Z" fill="#FAF7F2" stroke="#D4AF37" stroke-width="0.75"/>
-                <!-- Gold Foil Accent Leaves -->
                 <path d="M80 20 C 90 10, 100 25, 90 35 C 80 45, 70 30, 80 20 Z" fill="url(#goldGrad)" opacity="0.9"/>
                 <path d="M125 50 C 135 40, 145 55, 135 65 C 125 75, 115 60, 125 50 Z" fill="url(#goldGrad)" opacity="0.85"/>
                 <defs>
@@ -162,7 +145,7 @@
             </svg>
         </div>
 
-        <!-- Botanical Vector Accents - Bottom Right -->
+        <!-- Adornos Botánicos Derecha -->
         <div class="absolute -bottom-6 -right-6 w-56 h-56 md:w-80 md:h-80 pointer-events-none z-10 opacity-95">
             <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full transform rotate-180">
                 <path d="M10 10 Q 90 40 160 110" stroke="#C59B27" stroke-width="1.5" stroke-dasharray="3 2"/>
@@ -176,20 +159,17 @@
             </svg>
         </div>
 
-        <!-- Header Titles -->
+        <!-- Título -->
         <header class="text-center pt-6 z-20 max-w-lg mx-auto">
             <h3 class="font-cinzel text-xs md:text-sm tracking-[0.35em] text-gray-700 uppercase mb-2 font-semibold">Nuestra Boda</h3>
             <h1 class="font-script text-5xl md:text-7xl text-gold-gradient py-1 drop-shadow-sm leading-tight">Lizbeth & Noel</h1>
             <p class="font-garamond text-lg md:text-xl text-gray-800 tracking-widest mt-2 font-medium">17 de ABRIL del 2027</p>
         </header>
 
-        <!-- Interactive Envelope Component -->
+        <!-- Sobre -->
         <div class="relative my-6 w-full max-w-md flex flex-col items-center justify-center z-20">
-            
-            <!-- Envelope Body Container -->
             <div id="envelopeContainer" class="relative w-80 h-52 sm:w-96 sm:h-60 bg-emerald-900 rounded-lg shadow-2xl cursor-pointer transform transition-transform hover:scale-[1.02] duration-300 border border-emerald-800/80 flex items-center justify-center overflow-visible">
                 
-                <!-- Envelope Flap (Triangle Top) -->
                 <div class="envelope-flap absolute top-0 left-0 w-full h-full pointer-events-none">
                     <svg viewBox="0 0 384 240" class="w-full h-full drop-shadow-md overflow-visible">
                         <polygon points="0,0 384,0 192,130" fill="#0b3d2e" stroke="#072b20" stroke-width="1"/>
@@ -197,34 +177,24 @@
                     </svg>
                 </div>
 
-                <!-- Envelope V-Bottom & Sides Graphics -->
                 <div class="absolute inset-0 pointer-events-none rounded-lg overflow-hidden z-10">
                     <svg viewBox="0 0 384 240" class="w-full h-full">
-                        <!-- Left Flap -->
                         <polygon points="0,0 0,240 180,120" fill="#093326"/>
-                        <!-- Right Flap -->
                         <polygon points="384,0 384,240 204,120" fill="#072b20"/>
-                        <!-- Bottom Flap -->
                         <polygon points="0,240 384,240 192,110" fill="#0b3d2e"/>
-                        <!-- Inner Shadows for Depth -->
                         <line x1="0" y1="240" x2="192" y2="110" stroke="#051f17" stroke-width="2" opacity="0.4"/>
                         <line x1="384" y1="240" x2="192" y2="110" stroke="#051f17" stroke-width="2" opacity="0.4"/>
                     </svg>
                 </div>
 
-                <!-- Gold Wax Seal (Centered on Flap Tip) -->
                 <div id="waxSeal" onclick="openInvitation()" class="wax-seal absolute top-[42%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 sm:w-20 sm:h-20 rounded-full z-30 flex items-center justify-center cursor-pointer transition-transform duration-300 hover:scale-110 active:scale-95 group">
-                    <!-- Custom L&N Monogram inside Wax Seal -->
                     <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full border border-amber-300/40 flex items-center justify-center text-center p-1">
                         <span class="font-script text-amber-100 text-xl sm:text-2xl font-bold tracking-tighter drop-shadow-md select-none group-hover:scale-105 transition-transform">L&N</span>
                     </div>
                 </div>
-
             </div>
 
-            <!-- Spiral Arrow & Click Prompt -->
             <div class="relative mt-6 flex flex-col items-center justify-center">
-                <!-- Curved Gold Dashed Spiral SVG -->
                 <svg class="w-24 h-12 text-amber-600 -mt-2 animate-pulse-subtle" viewBox="0 0 100 50" fill="none">
                     <path d="M 20 40 Q 10 10, 50 10 Q 80 10, 65 30 Q 55 40, 48 22" stroke="#B38728" stroke-width="2" stroke-dasharray="3 3" fill="none" stroke-linecap="round"/>
                     <polygon points="44,26 52,18 52,28" fill="#B38728"/>
@@ -234,95 +204,141 @@
                     CLICK PARA ABRIR LA INVITACIÓN
                 </button>
             </div>
-
         </div>
 
-        <!-- Reserved Passes Badge Container -->
         <footer class="text-center z-20 pb-4">
             <p class="font-cinzel text-xs tracking-widest text-gray-600 uppercase font-medium mb-2">HEMOS RESERVADO</p>
-            
-            <div class="inline-flex items-center justify-center w-14 h-12 rounded-xl bg-white border-2 border-emerald-800 shadow-md my-1">
+            <div class="inline-flex items-center justify-center min-w-[3.5rem] h-12 px-3 rounded-xl bg-white border-2 border-emerald-800 shadow-md my-1">
                 <span id="passesCount" class="font-garamond text-2xl font-bold text-emerald-900">2</span>
             </div>
-
-            <p class="font-cinzel text-xs tracking-widest text-gray-600 uppercase font-medium mt-2">LUGARES EN SU HONOR</p>
+            <p id="passesLabel" class="font-cinzel text-xs tracking-widest text-gray-600 uppercase font-medium mt-2">LUGARES EN SU HONOR</p>
         </footer>
-
     </div>
 
-    <!-- MAIN INVITATION CONTENT (Hidden initially, revealed after envelope opens) -->
+
+    <!-- APARTADO 2: CONTENIDO PRINCIPAL -->
     <main id="mainContent" class="hidden opacity-0 max-w-3xl mx-auto w-full px-4 py-8 sm:py-12 transition-all duration-1000 space-y-12">
         
-        <!-- Header Banner -->
-        <section class="text-center bg-white/80 backdrop-blur-md p-8 md:p-12 rounded-2xl shadow-xl border border-amber-200/60 relative overflow-hidden">
-            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-emerald-900 via-amber-400 to-emerald-900"></div>
+        <!-- SECCIÓN 1: FOTO PORTADA PRINCIPAL -->
+        <section class="text-center bg-white/90 backdrop-blur-md rounded-2xl shadow-xl border border-amber-200/60 overflow-hidden relative">
+            <div class="h-2 bg-gradient-to-r from-emerald-900 via-amber-400 to-emerald-900"></div>
             
-            <p class="font-cinzel text-xs tracking-[0.3em] text-emerald-900 uppercase font-semibold mb-3">Con la bendición de Dios y nuestros padres</p>
-            <h2 class="font-script text-5xl md:text-7xl text-gold-gradient mb-2">Lizbeth & Noel</h2>
-            <p class="font-garamond text-xl text-gray-700 italic">"Tiene el amor su propio tiempo, su propio espacio y sus propias razones."</p>
-            
-            <div class="my-6 border-t border-b border-amber-200/80 py-4 max-w-md mx-auto">
-                <p class="font-cinzel text-lg md:text-xl tracking-wider text-emerald-900 font-bold">SÁBADO, 17 DE ABRIL DE 2027</p>
-                <p class="font-garamond text-md text-gray-600">Hermosillo, Sonora</p>
+            <!-- 📷 IMAGEN EN GITHUB: img/portada.jpg -->
+            <div class="relative w-full h-72 sm:h-96 overflow-hidden group">
+                <img src="portada.jpg" alt="Lizbeth y Noel" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20"></div>
+                <div class="absolute bottom-4 left-0 right-0 text-white font-cinzel text-xs tracking-[0.3em] uppercase opacity-90">
+                    Nuestra Historia Comienza Aquí
+                </div>
             </div>
 
-            <!-- Countdown Timer -->
-            <div class="mt-8">
-                <h4 class="font-cinzel text-xs uppercase tracking-widest text-gray-500 mb-4 font-semibold">Faltan únicamente</h4>
-                <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto">
-                    <div class="bg-emerald-900 text-amber-100 p-2 sm:p-3 rounded-lg shadow">
-                        <span id="cdDays" class="block font-garamond text-2xl sm:text-3xl font-bold">00</span>
-                        <span class="font-cinzel text-[10px] uppercase tracking-wider text-amber-200/80">Días</span>
+            <div class="p-8 md:p-10">
+                <p class="font-cinzel text-xs tracking-[0.3em] text-emerald-900 uppercase font-semibold mb-3">Con la bendición de Dios y nuestros padres</p>
+                <h2 class="font-script text-5xl md:text-7xl text-gold-gradient mb-2">Lizbeth & Noel</h2>
+                <p class="font-garamond text-xl text-gray-700 italic max-w-lg mx-auto">"Tiene el amor su propio tiempo, su propio espacio y sus propias razones."</p>
+                
+                <div class="my-6 border-t border-b border-amber-200/80 py-4 max-w-md mx-auto">
+                    <p class="font-cinzel text-lg md:text-xl tracking-wider text-emerald-900 font-bold">SÁBADO, 17 DE ABRIL DE 2027</p>
+                    <p class="font-garamond text-md text-gray-600">Hermosillo, Sonora</p>
+                </div>
+
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Boda+Lizbeth+%26+Noel&dates=20270417T180000/20270418T020000&details=¡Acompáñanos+a+celebrar+nuestra+boda!&location=Parroquia+Santa+Eduwiges,+Hermosillo,+Sonora" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-amber-100/80 text-amber-900 border border-amber-300 font-cinzel text-xs font-semibold hover:bg-amber-200 transition-colors shadow-sm mb-6">
+                    <i class="far fa-calendar-plus text-base"></i> Agregar a Google Calendar
+                </a>
+
+                <div class="grid sm:grid-cols-2 gap-6 pt-6 border-t border-amber-100 text-center">
+                    <div>
+                        <h4 class="font-cinzel text-xs tracking-widest text-emerald-900 font-bold uppercase mb-2">Padres de la Novia</h4>
+                        <p class="font-garamond text-base text-gray-700 font-medium">Karla Chavez</p>
+                        <p class="font-garamond text-base text-gray-700 font-medium">Julian Contreras</p>
                     </div>
-                    <div class="bg-emerald-900 text-amber-100 p-2 sm:p-3 rounded-lg shadow">
-                        <span id="cdHours" class="block font-garamond text-2xl sm:text-3xl font-bold">00</span>
-                        <span class="font-cinzel text-[10px] uppercase tracking-wider text-amber-200/80">Hs</span>
+                    <div>
+                        <h4 class="font-cinzel text-xs tracking-widest text-emerald-900 font-bold uppercase mb-2">Padres del Novio</h4>
+                        <p class="font-garamond text-base text-gray-700 font-medium">Silvia Ozuna</p>
+                        <p class="font-garamond text-base text-gray-700 font-medium">Noe Ramirez</p>
                     </div>
-                    <div class="bg-emerald-900 text-amber-100 p-2 sm:p-3 rounded-lg shadow">
-                        <span id="cdMinutes" class="block font-garamond text-2xl sm:text-3xl font-bold">00</span>
-                        <span class="font-cinzel text-[10px] uppercase tracking-wider text-amber-200/80">Min</span>
-                    </div>
-                    <div class="bg-emerald-900 text-amber-100 p-2 sm:p-3 rounded-lg shadow">
-                        <span id="cdSeconds" class="block font-garamond text-2xl sm:text-3xl font-bold">00</span>
-                        <span class="font-cinzel text-[10px] uppercase tracking-wider text-amber-200/80">Seg</span>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-amber-100">
+                    <h4 class="font-cinzel text-xs uppercase tracking-widest text-gray-500 mb-4 font-semibold">Faltan únicamente</h4>
+                    <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto">
+                        <div class="bg-emerald-900 text-amber-100 p-2 sm:p-3 rounded-lg shadow">
+                            <span id="cdDays" class="block font-garamond text-2xl sm:text-3xl font-bold">00</span>
+                            <span class="font-cinzel text-[10px] uppercase tracking-wider text-amber-200/80">Días</span>
+                        </div>
+                        <div class="bg-emerald-900 text-amber-100 p-2 sm:p-3 rounded-lg shadow">
+                            <span id="cdHours" class="block font-garamond text-2xl sm:text-3xl font-bold">00</span>
+                            <span class="font-cinzel text-[10px] uppercase tracking-wider text-amber-200/80">Hs</span>
+                        </div>
+                        <div class="bg-emerald-900 text-amber-100 p-2 sm:p-3 rounded-lg shadow">
+                            <span id="cdMinutes" class="block font-garamond text-2xl sm:text-3xl font-bold">00</span>
+                            <span class="font-cinzel text-[10px] uppercase tracking-wider text-amber-200/80">Min</span>
+                        </div>
+                        <div class="bg-emerald-900 text-amber-100 p-2 sm:p-3 rounded-lg shadow">
+                            <span id="cdSeconds" class="block font-garamond text-2xl sm:text-3xl font-bold">00</span>
+                            <span class="font-cinzel text-[10px] uppercase tracking-wider text-amber-200/80">Seg</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Locations Grid Section -->
+
+        <!-- SECCIÓN 2: UBICACIONES -->
         <section class="grid md:grid-cols-2 gap-6">
             
-            <!-- Ceremony Card -->
-            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-emerald-900/10 flex flex-col justify-between text-center hover:shadow-xl transition-shadow">
+            <!-- Ceremonia -->
+            <div class="bg-white rounded-2xl shadow-lg border border-emerald-900/10 overflow-hidden flex flex-col justify-between hover:shadow-xl transition-shadow">
                 <div>
-                    <div class="w-14 h-14 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-800/20 text-emerald-800">
-                        <i class="fas font-solid fa-church text-2xl"></i>
+                    <!-- 📷 IMAGEN EN GITHUB: img/iglesia.jpg -->
+                    <div class="relative h-48 w-full overflow-hidden">
+                        <img src="iglesia.jpg" alt="Parroquia Santa Eduwiges" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-emerald-900/20"></div>
+                        <span class="absolute top-3 right-3 bg-emerald-900/80 text-amber-200 font-cinzel text-[10px] px-3 py-1 rounded-full uppercase tracking-widest backdrop-blur-sm">
+                            Ceremonia
+                        </span>
                     </div>
-                    <h3 class="font-cinzel text-xl font-bold text-emerald-900 mb-1">Ceremonia Religiosa</h3>
-                    <p class="font-garamond text-lg font-semibold text-amber-700 mb-3">06:00 PM</p>
-                    <p class="font-montserrat font-medium text-gray-800 text-sm">Parroquia Santa Eduwiges</p>
-                    <p class="font-garamond text-gray-600 text-sm mt-1">Hermosillo, Sonora</p>
+
+                    <div class="p-6 text-center">
+                        <div class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center mx-auto -mt-12 relative z-10 border-2 border-white shadow-md text-emerald-800">
+                            <i class="fas fa-church text-xl"></i>
+                        </div>
+                        <h3 class="font-cinzel text-xl font-bold text-emerald-900 mt-2 mb-1">Ceremonia Religiosa</h3>
+                        <p class="font-garamond text-lg font-semibold text-amber-700 mb-2">06:00 PM</p>
+                        <p class="font-montserrat font-medium text-gray-800 text-sm">Parroquia Santa Eduwiges</p>
+                        <p class="font-garamond text-gray-600 text-sm mt-1">Hermosillo, Sonora</p>
+                    </div>
                 </div>
-                <div class="mt-6">
+                <div class="p-6 pt-0">
                     <a href="https://www.google.com/maps/place/Parroquia+Santa+Eduwiges/@29.0781394,-110.9679341,14z/data=!4m10!1m2!2m1!1ssanta+eduwiges+iglesia!3m6!1s0x86ce842274e2d679:0x3db108a307663f13!8m2!3d29.100841!4d-110.95694" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-emerald-900 text-amber-100 font-cinzel text-xs tracking-wider uppercase hover:bg-emerald-800 transition-colors shadow">
                         <i class="fas fa-location-dot"></i> Ver en Google Maps
                     </a>
                 </div>
             </div>
 
-            <!-- Reception Card -->
-            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-lg border border-emerald-900/10 flex flex-col justify-between text-center hover:shadow-xl transition-shadow">
+            <!-- Recepción -->
+            <div class="bg-white rounded-2xl shadow-lg border border-emerald-900/10 overflow-hidden flex flex-col justify-between hover:shadow-xl transition-shadow">
                 <div>
-                    <div class="w-14 h-14 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4 border border-emerald-800/20 text-emerald-800">
-                        <i class="fas fa-glass-cheers text-2xl"></i>
+                    <!-- 📷 IMAGEN EN GITHUB: img/jardin.jpg -->
+                    <div class="relative h-48 w-full overflow-hidden">
+                        <img src="jardin.jpg" alt="Salón Rose Garden" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-emerald-900/20"></div>
+                        <span class="absolute top-3 right-3 bg-emerald-900/80 text-amber-200 font-cinzel text-[10px] px-3 py-1 rounded-full uppercase tracking-widest backdrop-blur-sm">
+                            Recepción
+                        </span>
                     </div>
-                    <h3 class="font-cinzel text-xl font-bold text-emerald-900 mb-1">Recepción</h3>
-                    <p class="font-garamond text-lg font-semibold text-amber-700 mb-3">08:00 PM</p>
-                    <p class="font-montserrat font-medium text-gray-800 text-sm">Salón Rose Garden</p>
-                    <p class="font-garamond text-gray-600 text-sm mt-1">Hermosillo, Sonora</p>
+
+                    <div class="p-6 text-center">
+                        <div class="w-12 h-12 bg-emerald-50 rounded-full flex items-center justify-center mx-auto -mt-12 relative z-10 border-2 border-white shadow-md text-emerald-800">
+                            <i class="fas fa-glass-cheers text-xl"></i>
+                        </div>
+                        <h3 class="font-cinzel text-xl font-bold text-emerald-900 mt-2 mb-1">Recepción</h3>
+                        <p class="font-garamond text-lg font-semibold text-amber-700 mb-2">08:00 PM</p>
+                        <p class="font-montserrat font-medium text-gray-800 text-sm">Salón Rose Garden</p>
+                        <p class="font-garamond text-gray-600 text-sm mt-1">Hermosillo, Sonora</p>
+                    </div>
                 </div>
-                <div class="mt-6">
+                <div class="p-6 pt-0">
                     <a href="https://maps.google.com/?q=Sal%C3%B3n+Rose+Garden+Hermosillo" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-emerald-900 text-amber-100 font-cinzel text-xs tracking-wider uppercase hover:bg-emerald-800 transition-colors shadow">
                         <i class="fas fa-location-dot"></i> Ver en Google Maps
                     </a>
@@ -331,13 +347,24 @@
 
         </section>
 
-        <!-- Timeline Section -->
+
+        <!-- SECCIÓN 3: BANNER FOTO PREVIO ITINERARIO -->
+        <!-- 📷 IMAGEN EN GITHUB: img/banner.jpg -->
+        <section class="relative rounded-2xl overflow-hidden shadow-xl h-64 sm:h-80 flex items-center justify-center text-center">
+            <img src="banner.jpg" alt="Momentos Especiales" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-emerald-900/60 backdrop-blur-[2px]"></div>
+            <div class="relative z-10 p-6 max-w-lg text-white">
+                <p class="font-script text-4xl sm:text-5xl text-amber-200 mb-2">Un Día Inolvidable</p>
+                <p class="font-cinzel text-xs sm:text-sm tracking-widest uppercase text-amber-100/90 font-medium">Cada segundo está pensado para compartir nuestra alegría contigo</p>
+            </div>
+        </section>
+
+
+        <!-- SECCIÓN 4: ITINERARIO -->
         <section class="bg-white/90 p-8 rounded-2xl shadow-lg border border-amber-200/60">
             <h3 class="font-cinzel text-2xl font-bold text-center text-emerald-900 mb-8 uppercase tracking-wider">Itinerario de Nuestra Boda</h3>
             
             <div class="relative border-l-2 border-emerald-800/30 ml-4 md:ml-32 space-y-8">
-                
-                <!-- Event 1 -->
                 <div class="relative pl-6">
                     <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-800 border-2 border-white"></span>
                     <span class="md:absolute md:-left-32 md:top-1 font-garamond font-bold text-lg text-amber-700">06:00 PM</span>
@@ -345,7 +372,6 @@
                     <p class="font-montserrat text-xs text-gray-600 mt-1">Parroquia Santa Eduwiges</p>
                 </div>
 
-                <!-- Event 2 -->
                 <div class="relative pl-6">
                     <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-800 border-2 border-white"></span>
                     <span class="md:absolute md:-left-32 md:top-1 font-garamond font-bold text-lg text-amber-700">08:00 PM</span>
@@ -353,7 +379,6 @@
                     <p class="font-montserrat text-xs text-gray-600 mt-1">Llegada de invitados a Salón Rose Garden</p>
                 </div>
 
-                <!-- Event 3 -->
                 <div class="relative pl-6">
                     <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-800 border-2 border-white"></span>
                     <span class="md:absolute md:-left-32 md:top-1 font-garamond font-bold text-lg text-amber-700">09:00 PM</span>
@@ -361,75 +386,163 @@
                     <p class="font-montserrat text-xs text-gray-600 mt-1">Cena formal e inicio del brindis</p>
                 </div>
 
-                <!-- Event 4 -->
                 <div class="relative pl-6">
                     <span class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-emerald-800 border-2 border-white"></span>
                     <span class="md:absolute md:-left-32 md:top-1 font-garamond font-bold text-lg text-amber-700">10:00 PM</span>
                     <h4 class="font-cinzel font-semibold text-emerald-900 text-base">Primer Baile & Fiesta</h4>
                     <p class="font-montserrat text-xs text-gray-600 mt-1">Apertura de pista de baile y celebración</p>
                 </div>
-
             </div>
         </section>
 
-        <!-- Dresscode & Gift Cards -->
+
+        <!-- SECCIÓN 5: GALERÍA -->
+        <section class="bg-white/90 p-8 rounded-2xl shadow-lg border border-amber-200/60 text-center">
+            <h3 class="font-cinzel text-2xl font-bold text-emerald-900 uppercase tracking-wider mb-2">Nuestra Galería</h3>
+            <p class="font-garamond text-gray-600 mb-6">Un vistazo a nuestros mejores momentos juntos</p>
+            
+            <!-- 📷 IMÁGENES EN GITHUB: img/galeria1.jpg a img/galeria6.jpg -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                <div class="h-44 sm:h-52 rounded-xl overflow-hidden shadow">
+                    <img src="galeria1.jpg" alt="Momento 1" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="h-44 sm:h-52 rounded-xl overflow-hidden shadow">
+                    <img src="galeria2.jpg" alt="Momento 2" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="h-44 sm:h-52 rounded-xl overflow-hidden shadow">
+                    <img src="galeria3.jpg" alt="Momento 3" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="h-44 sm:h-52 rounded-xl overflow-hidden shadow">
+                    <img src="galeria4.jpg" alt="Momento 4" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="h-44 sm:h-52 rounded-xl overflow-hidden shadow">
+                    <img src="galeria5.jpg" alt="Momento 5" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="h-44 sm:h-52 rounded-xl overflow-hidden shadow">
+                    <img src="galeria6.jpg" alt="Momento 6" class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECCIÓN 6: VESTIMENTA Y MESA DE REGALOS -->
         <section class="grid md:grid-cols-2 gap-6">
-            <!-- Dresscode -->
-            <div class="bg-emerald-900 text-amber-100 p-6 rounded-2xl text-center flex flex-col items-center justify-center border border-amber-300/30">
+            <div class="bg-emerald-900 text-amber-100 p-6 rounded-2xl text-center flex flex-col items-center justify-center border border-amber-300/30 shadow-lg">
                 <i class="fas fa-user-tie text-3xl text-amber-300 mb-3"></i>
                 <h4 class="font-cinzel text-lg font-bold tracking-wider uppercase mb-1">Código de Vestimenta</h4>
                 <p class="font-garamond text-xl font-semibold text-amber-200">Riguroso Etiqueta</p>
                 <p class="font-montserrat text-xs text-amber-100/70 mt-2">Traje oscuro / Vestido largo</p>
             </div>
 
-            <!-- Envelope Rain / Gift -->
-            <div class="bg-emerald-900 text-amber-100 p-6 rounded-2xl text-center flex flex-col items-center justify-center border border-amber-300/30">
+            <div class="bg-emerald-900 text-amber-100 p-6 rounded-2xl text-center flex flex-col items-center justify-center border border-amber-300/30 shadow-lg">
                 <i class="fas fa-envelope-open-text text-3xl text-amber-300 mb-3"></i>
                 <h4 class="font-cinzel text-lg font-bold tracking-wider uppercase mb-1">Mesa de Regalos</h4>
                 <p class="font-garamond text-xl font-semibold text-amber-200">Lluvia de Sobres</p>
-                <p class="font-montserrat text-xs text-amber-100/70 mt-2">Su presencia es nuestro mejor regalo. Si desean realizarnos un obsequio, dispondremos de un buzón en la recepción.</p>
+                <p class="font-montserrat text-xs text-amber-100/70 mt-2 mb-4">Su presencia es nuestro mejor regalo. Si desean realizarnos un obsequio, dispondremos de un buzón el día del evento.</p>
+                <button onclick="toggleBankModal()" class="px-4 py-2 rounded-xl bg-amber-200 text-emerald-900 font-cinzel text-xs font-bold hover:bg-amber-100 transition shadow">
+                    Ver Datos Bancarios / CLABE
+                </button>
             </div>
         </section>
 
-        <!-- WhatsApp RSVP Confirmation Form -->
-        <section class="bg-white p-8 rounded-2xl shadow-xl border border-emerald-900/20 text-center">
-            <i class="fab fa-whatsapp text-4xl text-emerald-600 mb-3"></i>
-            <h3 class="font-cinzel text-2xl font-bold text-emerald-900 uppercase tracking-wider mb-2">Confirmación de Asistencia</h3>
-            <p class="font-garamond text-gray-600 mb-6">Por favor confirma tu presencia antes del 15 de Marzo de 2027.</p>
 
-            <form id="rsvpForm" onsubmit="sendWhatsApp(event)" class="max-w-md mx-auto space-y-4 text-left">
-                <div>
-                    <label for="fullName" class="block font-cinzel text-xs font-bold text-gray-700 uppercase mb-1">Nombre Completo</label>
-                    <input type="text" id="fullName" required placeholder="Ej. María López" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-800 focus:border-transparent outline-none font-montserrat text-sm transition">
-                </div>
-
-                <div>
-                    <label for="attendingCount" class="block font-cinzel text-xs font-bold text-gray-700 uppercase mb-1">Número de Asistentes</label>
-                    <select id="attendingCount" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-800 focus:border-transparent outline-none font-montserrat text-sm bg-white transition">
-                        <!-- Options populated dynamically based on URL parameter ?number=X -->
-                    </select>
-                </div>
-
-                <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-emerald-800 text-amber-100 font-cinzel text-xs font-bold tracking-widest uppercase hover:bg-emerald-900 transition-all duration-300 shadow-lg flex items-center justify-center gap-2">
-                    <i class="fab fa-whatsapp text-lg"></i> Confirmar por WhatsApp
+        <!-- SECCIÓN 7: CANCIONES -->
+        <section class="bg-white/90 p-8 rounded-2xl shadow-lg border border-amber-200/60 text-center">
+            <i class="fas fa-compact-disc text-3xl text-emerald-800 mb-3"></i>
+            <h3 class="font-cinzel text-xl font-bold text-emerald-900 uppercase tracking-wider mb-2">¿Qué canción no puede faltar?</h3>
+            <p class="font-garamond text-gray-600 mb-4 text-sm">Ayúdanos a armar la playlist de la noche proponiendo tu canción favorita</p>
+            
+            <form id="songForm" onsubmit="sendSongWhatsApp(event)" class="max-w-md mx-auto space-y-3">
+                <input type="text" id="songName" required placeholder="Nombre de la Canción y Artista" class="w-full px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-emerald-800 outline-none font-montserrat text-sm">
+                <button type="submit" class="w-full py-2.5 px-4 rounded-xl bg-emerald-800 text-amber-100 font-cinzel text-xs font-bold uppercase hover:bg-emerald-900 transition">
+                    Sugerir Canción por WhatsApp
                 </button>
             </form>
         </section>
 
+
+        <!-- SECCIÓN 8: CONFIRMACIÓN RSVP CON FOTO DE FONDO -->
+        <section class="relative rounded-2xl shadow-xl overflow-hidden border border-emerald-900/30">
+            <!-- 📷 IMAGEN EN GITHUB: img/fondo-rsvp.jpg -->
+            <img src="fondo-rsvp.jpg" alt="Fondo Confirmación" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-emerald-950/85 backdrop-blur-sm"></div>
+
+            <div class="relative z-10 p-8 sm:p-10 text-center text-white">
+                <i class="fab fa-whatsapp text-4xl text-emerald-400 mb-3"></i>
+                <h3 class="font-cinzel text-2xl font-bold uppercase tracking-wider mb-2 text-amber-200">Confirmación de Asistencia</h3>
+                <p class="font-garamond text-gray-200 mb-6">Por favor confirma tu presencia antes del 15 de Marzo de 2027.</p>
+
+                <form id="rsvpForm" onsubmit="sendWhatsApp(event)" class="max-w-md mx-auto space-y-4 text-left">
+                    <div>
+                        <label for="fullName" class="block font-cinzel text-xs font-bold text-amber-100 uppercase mb-1">Nombre Completo</label>
+                        <input type="text" id="fullName" required placeholder="Ej. María López" class="w-full px-4 py-3 rounded-xl border border-amber-300/30 bg-white/90 text-gray-900 focus:ring-2 focus:ring-amber-300 outline-none font-montserrat text-sm transition">
+                    </div>
+
+                    <div>
+                        <label for="attendanceStatus" class="block font-cinzel text-xs font-bold text-amber-100 uppercase mb-1">¿Asistirás?</label>
+                        <select id="attendanceStatus" class="w-full px-4 py-3 rounded-xl border border-amber-300/30 bg-white/90 text-gray-900 focus:ring-2 focus:ring-amber-300 outline-none font-montserrat text-sm transition">
+                            <option value="si">¡Sí, con mucho gusto asistiré!</option>
+                            <option value="no">Lo siento, no podré asistir</option>
+                        </select>
+                    </div>
+
+                    <div id="countContainer">
+                        <label for="attendingCount" class="block font-cinzel text-xs font-bold text-amber-100 uppercase mb-1">Número de Asistentes</label>
+                        <select id="attendingCount" class="w-full px-4 py-3 rounded-xl border border-amber-300/30 bg-white/90 text-gray-900 focus:ring-2 focus:ring-amber-300 outline-none font-montserrat text-sm transition">
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="rsvpMessage" class="block font-cinzel text-xs font-bold text-amber-100 uppercase mb-1">Mensaje o Restricción Alimenticia (Opcional)</label>
+                        <textarea id="rsvpMessage" rows="2" placeholder="Ej. ¡Felicidades! / Menú vegetariano" class="w-full px-4 py-2.5 rounded-xl border border-amber-300/30 bg-white/90 text-gray-900 focus:ring-2 focus:ring-amber-300 outline-none font-montserrat text-sm transition"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-amber-400 text-emerald-950 font-cinzel text-xs font-bold tracking-widest uppercase hover:bg-amber-300 transition-all duration-300 shadow-lg flex items-center justify-center gap-2">
+                        <i class="fab fa-whatsapp text-lg"></i> Enviar Confirmación por WhatsApp
+                    </button>
+                </form>
+            </div>
+        </section>
+
+
+        <!-- FOOTER -->
         <footer class="text-center py-6 border-t border-amber-200">
-            <p class="font-script text-3xl text-gold-gradient">Lizbeth & Noel</p>
+            <p class="font-script text-4xl text-gold-gradient">Lizbeth & Noel</p>
             <p class="font-cinzel text-[10px] tracking-widest text-gray-500 uppercase mt-1">¡Esperamos contar con tu presencia!</p>
         </footer>
 
     </main>
 
+
+    <!-- MODAL DATOS BANCARIOS -->
+    <div id="bankModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl p-6 sm:p-8 max-w-sm w-full shadow-2xl relative text-center border border-amber-200">
+            <button onclick="toggleBankModal()" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-xl w-8 h-8 rounded-full flex items-center justify-center">&times;</button>
+            <i class="fas fa-university text-3xl text-emerald-800 mb-3"></i>
+            <h4 class="font-cinzel text-lg font-bold text-emerald-900 uppercase mb-1">Datos Bancarios</h4>
+            <p class="font-garamond text-sm text-gray-600 mb-4">Agradecemos profundamente tu cariño y buenos deseos.</p>
+            
+            <div class="bg-cream-100 p-4 rounded-xl text-left space-y-2 font-montserrat text-xs border border-cream-200 mb-4">
+                <p><span class="font-semibold text-emerald-900">Banco:</span> BBVA</p>
+                <p><span class="font-semibold text-emerald-900">Titular:</span> Lizbeth Ramírez</p>
+                <p><span class="font-semibold text-emerald-900">Cuenta:</span> 1234 5678 9012</p>
+                <p class="flex justify-between items-center"><span class="font-semibold text-emerald-900">CLABE:</span> <span id="clabeNum">0123 4567 8901 2345 67</span></p>
+            </div>
+
+            <button onclick="copyCLABE()" class="w-full py-2.5 px-4 rounded-xl bg-emerald-800 text-amber-100 font-cinzel text-xs font-bold hover:bg-emerald-900 transition flex items-center justify-center gap-2">
+                <i class="far fa-copy"></i> Copiar CLABE Interbancaria
+            </button>
+            <p id="copyToast" class="text-emerald-700 font-montserrat text-[11px] mt-2 hidden font-medium">¡CLABE copiada al portapapeles!</p>
+        </div>
+    </div>
+
+
+    <!-- JAVASCRIPT -->
     <script>
-        // Global State & URL Parameters Handling
-        let passesCount = 2; // Default limit
+        let passesCount = 2;
         const targetDate = new Date("April 17, 2027 18:00:00").getTime();
 
         window.addEventListener('DOMContentLoaded', () => {
-            // Read ?number=X from URL
             const urlParams = new URLSearchParams(window.location.search);
             const numParam = urlParams.get('number') || urlParams.get('pases') || urlParams.get('pass');
             
@@ -437,11 +550,13 @@
                 passesCount = parseInt(numParam);
             }
 
-            // Update DOM badge
             const badgeEl = document.getElementById('passesCount');
+            const passesLabel = document.getElementById('passesLabel');
             if (badgeEl) badgeEl.innerText = passesCount;
+            if (passesLabel) {
+                passesLabel.innerText = passesCount === 1 ? 'LUGAR EN SU HONOR' : 'LUGARES EN SU HONOR';
+            }
 
-            // Populate RSVP select dropdown
             const selectEl = document.getElementById('attendingCount');
             if (selectEl) {
                 selectEl.innerHTML = '';
@@ -453,26 +568,21 @@
                 }
             }
 
-            // Start countdown loop
             initCountdown();
         });
 
-        // Open Envelope Animation & Reveal Main Section
         function openInvitation() {
             const cover = document.getElementById('coverScreen');
             const envelope = document.getElementById('envelopeContainer');
             const mainContent = document.getElementById('mainContent');
 
-            // Add CSS class to fold top flap back
             envelope.classList.add('envelope-open');
 
-            // Autoplay Audio
             const audio = document.getElementById('bgAudio');
             if (audio) {
-                audio.play().catch(e => console.log('Audio autoplay prevented by browser permissions:', e));
+                audio.play().catch(e => console.log('Audio autoplay restringido:', e));
             }
 
-            // Smooth transition from cover screen to main content
             setTimeout(() => {
                 cover.classList.add('opacity-0', 'pointer-events-none');
                 
@@ -480,7 +590,6 @@
                     cover.classList.add('hidden');
                     mainContent.classList.remove('hidden');
                     
-                    // Fade in main section smoothly
                     setTimeout(() => {
                         mainContent.classList.remove('opacity-0');
                         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -490,7 +599,6 @@
             }, 700);
         }
 
-        // Toggle Audio Playback
         function toggleAudio() {
             const audio = document.getElementById('bgAudio');
             const icon = document.getElementById('audioIcon');
@@ -504,7 +612,6 @@
             }
         }
 
-        // Live Countdown Clock
         function initCountdown() {
             function updateClock() {
                 const now = new Date().getTime();
@@ -532,20 +639,52 @@
             setInterval(updateClock, 1000);
         }
 
-        // Format and redirect to WhatsApp RSVP
+        function toggleBankModal() {
+            const modal = document.getElementById('bankModal');
+            modal.classList.toggle('hidden');
+        }
+
+        function copyCLABE() {
+            const clabeText = document.getElementById('clabeNum').innerText;
+            navigator.clipboard.writeText(clabeText).then(() => {
+                const toast = document.getElementById('copyToast');
+                toast.classList.remove('hidden');
+                setTimeout(() => toast.classList.add('hidden'), 3000);
+            });
+        }
+
         function sendWhatsApp(e) {
             e.preventDefault();
             const name = document.getElementById('fullName').value.trim();
+            const status = document.getElementById('attendanceStatus').value;
             const count = document.getElementById('attendingCount').value;
+            const note = document.getElementById('rsvpMessage').value.trim();
 
             if (!name) return;
 
-            const phone = "5216620000000"; // Generic phone target
-            const text = `¡Hola! Confirmo mi asistencia a la Boda de Lizbeth & Noel. Nombre: ${name}, Personas que asistiremos: ${count}`;
-            const encodedText = encodeURIComponent(text);
-            
-            const whatsappUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedText}`;
+            const phone = "5216622977259"; 
+            let text = "";
+
+            if (status === "si") {
+                text = `¡Hola! Confirmo mi asistencia a la Boda de Lizbeth & Noel.\n\n👤 *Nombre:* ${name}\n👥 *Asistentes:* ${count} persona(s)`;
+                if (note) text += `\n💬 *Mensaje/Notas:* ${note}`;
+            } else {
+                text = `Hola Lizbeth y Noel, lamentablemente no podré asistir a su boda.\n\n👤 *Nombre:* ${name}`;
+                if (note) text += `\n💬 *Mensaje:* ${note}`;
+            }
+
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`;
             window.open(whatsappUrl, '_blank');
+        }
+
+        function sendSongWhatsApp(e) {
+            e.preventDefault();
+            const song = document.getElementById('songName').value.trim();
+            if (!song) return;
+
+            const phone = "5216622977259";
+            const text = `¡Hola! Me gustaría sugerir esta canción para la fiesta de su boda 🎶:\n\n🎵 *Canción:* ${song}`;
+            window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(text)}`, '_blank');
         }
     </script>
 </body>
